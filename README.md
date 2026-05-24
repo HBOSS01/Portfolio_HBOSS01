@@ -56,4 +56,4 @@ public/
 
 ## Contact
 
-ahnaf00hasan@gmail.com — or just use the contact form on the site.
+mdf.hasnat@gmail.com — or just use the contact form on the site.
