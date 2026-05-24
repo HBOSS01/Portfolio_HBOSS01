@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls node_modules/tsparticles-engine/types/)",
+      "Bash(node -e \"const fs = require\\('fs'\\); const d = './node_modules/tsparticles-engine'; const items = fs.readdirSync\\(d\\); console.log\\(items\\)\")",
+      "Bash(node -e \"const fs = require\\('fs'\\); console.log\\(fs.readFileSync\\('./node_modules/tsparticles-engine/index.d.ts', 'utf8'\\).slice\\(0, 800\\)\\)\")",
+      "Bash(node -e \"const fs = require\\('fs'\\); console.log\\(fs.readFileSync\\('./node_modules/tsparticles-engine/bundle.d.ts', 'utf8'\\).slice\\(0, 600\\)\\)\")",
+      "Bash(node -e \"const p = require\\('./node_modules/tsparticles-engine/package.json'\\); console.log\\(p.main, p.module, p.types, p.exports ? 'has exports' : 'no exports'\\)\")",
+      "Bash(node -e \"const fs = require\\('fs'\\); console.log\\(fs.readFileSync\\('./node_modules/tsparticles-engine/types/index.d.ts', 'utf8'\\).slice\\(0, 1200\\)\\)\")",
+      "Bash(node -e \"const fs = require\\('fs'\\); const content = fs.readFileSync\\('./node_modules/tsparticles-engine/types/export-types.d.ts', 'utf8'\\); console.log\\(content.slice\\(0, 800\\)\\)\")"
+    ]
+  }
+}
