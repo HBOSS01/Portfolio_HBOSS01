@@ -1,6 +1,7 @@
 "use client";
 
 import type { LucideIcon } from "lucide-react";
+import { useIsDark } from "@/hooks/useIsDark";
 import { motion } from "framer-motion";
 import {
   BookOpen,
@@ -52,6 +53,7 @@ const HIGHLIGHTS = [
 /* ─── Section ───────────────────────────────────────────── */
 
 export default function About() {
+  const isDark = useIsDark();
   return (
     <section
       id="about"
@@ -105,7 +107,7 @@ export default function About() {
           </span>
 
           <h2 className="mt-5 text-4xl sm:text-5xl font-bold tracking-tight">
-            <span className="text-white">About </span>
+            <span className={isDark ? "text-white" : "text-slate-900"}>About </span>
             <span
               className="text-transparent bg-clip-text"
               style={{
@@ -134,23 +136,23 @@ export default function About() {
 
             {/* Bio paragraphs */}
             <motion.div {...scrollFadeUp(0.1)} className="flex flex-col gap-4">
-              <p className="text-[15px] leading-[1.9] text-white/50">
+              <p className={`text-[15px] leading-[1.9] ${isDark ? "text-white/50" : "text-slate-400"}`}>
                 I&apos;m{" "}
-                <span className="text-white/80 font-medium">
+                <span className={`font-medium ${isDark ? "text-white/80" : "text-slate-700"}`}>
                   Md Fatin Hasnat Patwary
                 </span>
                 , an AI Engineer and Researcher driven by a deep passion for
                 building intelligent systems that make a tangible difference.
                 My expertise spans{" "}
-                <span className="text-white/70">machine learning</span>,{" "}
-                <span className="text-white/70">
+                <span className={isDark ? "text-white/70" : "text-slate-600"}>machine learning</span>,{" "}
+                <span className={isDark ? "text-white/70" : "text-slate-600"}>
                   natural language processing
                 </span>
                 , and{" "}
-                <span className="text-white/70">computer vision</span> —
+                <span className={isDark ? "text-white/70" : "text-slate-600"}>computer vision</span> —
                 bridging cutting-edge research with real-world engineering.
               </p>
-              <p className="text-[15px] leading-[1.9] text-white/40">
+              <p className={`text-[15px] leading-[1.9] ${isDark ? "text-white/40" : "text-slate-400"}`}>
                 I thrive at the intersection of innovation and precision —
                 whether fine-tuning large language models, designing RAG
                 pipelines, or training end-to-end computer vision
@@ -175,10 +177,10 @@ export default function About() {
                 <Zap className="w-4 h-4 text-cyan-400" />
               </div>
               <div>
-                <p className="text-[13px] font-medium text-white/65 mb-1">
+                <p className={`text-[13px] font-medium mb-1 ${isDark ? "text-white/65" : "text-slate-600"}`}>
                   What drives me
                 </p>
-                <p className="text-[13px] text-white/38 leading-relaxed">
+                <p className={`text-[13px] leading-relaxed ${isDark ? "text-white/38" : "text-slate-400"}`}>
                   Building AI that doesn&apos;t just perform — but understands,
                   adapts, and empowers. Research-first thinking, production-grade
                   execution.
@@ -217,6 +219,7 @@ function StatCard({
   value: string;
   label: string;
 }) {
+  const isDark = useIsDark();
   return (
     <motion.div
       whileHover={{ y: -3, scale: 1.015 }}
@@ -246,7 +249,7 @@ function StatCard({
           {value}
         </span>
       </div>
-      <span className="text-[11.5px] text-white/40 tracking-wide leading-snug">
+      <span className={`text-[11.5px] tracking-wide leading-snug ${isDark ? "text-white/40" : "text-slate-400"}`}>
         {label}
       </span>
     </motion.div>
@@ -256,12 +259,13 @@ function StatCard({
 /* ─── Right glass card ──────────────────────────────────── */
 
 function GlassCard() {
+  const isDark = useIsDark();
   return (
     <div
       className="relative p-7 sm:p-8 rounded-3xl border overflow-hidden"
       style={{
-        backgroundColor: "rgba(6,182,212,0.025)",
-        borderColor: "rgba(6,182,212,0.1)",
+        backgroundColor: isDark ? "rgba(6,182,212,0.025)" : "rgba(255,255,255,0.7)",
+        borderColor: isDark ? "rgba(6,182,212,0.1)" : "rgba(6,182,212,0.15)",
         backdropFilter: "blur(24px)",
         WebkitBackdropFilter: "blur(24px)",
       }}
@@ -292,7 +296,7 @@ function GlassCard() {
         <section aria-label="Research areas">
           <div className="flex items-center gap-2 mb-4">
             <Sparkles className="w-4 h-4 text-cyan-400 shrink-0" />
-            <h3 className="text-[12px] font-semibold text-white/55 tracking-[0.12em] uppercase">
+            <h3 className={`text-[12px] font-semibold tracking-[0.12em] uppercase ${isDark ? "text-white/55" : "text-slate-500"}`}>
               Research Areas
             </h3>
           </div>
@@ -336,10 +340,10 @@ function GlassCard() {
               <li key={h.label} className="flex items-start gap-2.5">
                 <ChevronRight className="w-3.5 h-3.5 text-cyan-400 mt-0.5 shrink-0" />
                 <div>
-                  <p className="text-[10.5px] text-white/30 tracking-[0.15em] uppercase font-mono mb-0.5">
+                  <p className={`text-[10.5px] tracking-[0.15em] uppercase font-mono mb-0.5 ${isDark ? "text-white/30" : "text-slate-400"}`}>
                     {h.label}
                   </p>
-                  <p className="text-[13.5px] text-white/60 leading-snug">
+                  <p className={`text-[13.5px] leading-snug ${isDark ? "text-white/60" : "text-slate-600"}`}>
                     {h.value}
                   </p>
                 </div>
@@ -374,9 +378,9 @@ function GlassCard() {
               Currently
             </span>
           </span>
-          <p className="text-[13px] text-white/40 leading-snug">
+          <p className={`text-[13px] leading-snug ${isDark ? "text-white/40" : "text-slate-400"}`}>
             Researching{" "}
-            <span className="text-white/60">multimodal AI</span> and building
+            <span className={isDark ? "text-white/60" : "text-slate-600"}>multimodal AI</span> and building
             production LLM systems
           </p>
         </div>

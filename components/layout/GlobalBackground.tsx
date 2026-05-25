@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { useIsDark } from "@/hooks/useIsDark";
 
 interface Particle {
   x:     number;
@@ -10,7 +11,8 @@ interface Particle {
   color: string;
 }
 
-const COLORS        = ["#22d3ee", "#818cf8"];
+const DARK_COLORS  = ["#22d3ee", "#818cf8"];
+const LIGHT_COLORS = ["#06b6d4", "#6366f1"];
 const COUNT         = 55;
 const LINK_DIST     = 180;
 const MAX_SPEED     = 1.2;
@@ -21,7 +23,7 @@ function rand(a: number, b: number) {
   return a + Math.random() * (b - a);
 }
 
-function initParticles(w: number, h: number): Particle[] {
+function initParticles(w: number, h: number, colors: string[]): Particle[] {
   const list: Particle[] = [];
   const margin = 200;
 
@@ -38,7 +40,7 @@ function initParticles(w: number, h: number): Particle[] {
     list.push({
       x: rand(c.x[0], c.x[1]), y: rand(c.y[0], c.y[1]),
       vx: rand(-0.25, 0.25),   vy: rand(-0.25, 0.25),
-      color: COLORS[Math.random() < 0.5 ? 0 : 1],
+      color: colors[Math.random() < 0.5 ? 0 : 1],
     });
   }
 
@@ -53,7 +55,7 @@ function initParticles(w: number, h: number): Particle[] {
     list.push({
       x, y,
       vx: rand(-0.25, 0.25), vy: rand(-0.25, 0.25),
-      color: COLORS[Math.random() < 0.5 ? 0 : 1],
+      color: colors[Math.random() < 0.5 ? 0 : 1],
     });
   }
 
@@ -62,7 +64,7 @@ function initParticles(w: number, h: number): Particle[] {
     list.push({
       x: rand(0, w),          y: rand(0, h),
       vx: rand(-0.25, 0.25),  vy: rand(-0.25, 0.25),
-      color: COLORS[Math.random() < 0.5 ? 0 : 1],
+      color: colors[Math.random() < 0.5 ? 0 : 1],
     });
   }
 
@@ -70,10 +72,18 @@ function initParticles(w: number, h: number): Particle[] {
 }
 
 export default function GlobalBackground() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const mouseRef  = useRef({ x: -9999, y: -9999 });
-  const rafRef    = useRef<number>(0);
-  const ptsRef    = useRef<Particle[]>([]);
+  const canvasRef  = useRef<HTMLCanvasElement>(null);
+  const mouseRef   = useRef({ x: -9999, y: -9999 });
+  const rafRef     = useRef<number>(0);
+  const ptsRef     = useRef<Particle[]>([]);
+  const isDark = useIsDark();
+
+  // Track isDark in a ref so the animation loop can read the latest value
+  const isDarkRef = useRef(true);
+
+  useEffect(() => {
+    isDarkRef.current = isDark;
+  }, [isDark]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -85,7 +95,8 @@ export default function GlobalBackground() {
       if (!canvas) return;
       canvas.width  = window.innerWidth;
       canvas.height = window.innerHeight;
-      ptsRef.current = initParticles(canvas.width, canvas.height);
+      const colors = isDarkRef.current ? DARK_COLORS : LIGHT_COLORS;
+      ptsRef.current = initParticles(canvas.width, canvas.height, colors);
     }
 
     function onMouseMove(e: MouseEvent) {
@@ -127,13 +138,14 @@ export default function GlobalBackground() {
 
       // Connections
       ctx.lineWidth = 0.5;
+      const linkAlpha = isDarkRef.current ? 0.35 : 0.2;
       for (let i = 0; i < pts.length; i++) {
         for (let j = i + 1; j < pts.length; j++) {
           const dx   = pts[i].x - pts[j].x;
           const dy   = pts[i].y - pts[j].y;
           const dist = Math.sqrt(dx * dx + dy * dy);
           if (dist < LINK_DIST) {
-            ctx.globalAlpha = (1 - dist / LINK_DIST) * 0.35;
+            ctx.globalAlpha = (1 - dist / LINK_DIST) * linkAlpha;
             ctx.strokeStyle = pts[i].color;
             ctx.beginPath();
             ctx.moveTo(pts[i].x, pts[i].y);
@@ -144,7 +156,7 @@ export default function GlobalBackground() {
       }
 
       // Dots
-      ctx.globalAlpha = 0.7;
+      ctx.globalAlpha = isDarkRef.current ? 0.7 : 0.5;
       for (const p of pts) {
         ctx.shadowBlur  = 6;
         ctx.shadowColor = p.color;
@@ -172,10 +184,23 @@ export default function GlobalBackground() {
     };
   }, []);
 
+  // Re-init particles when isDark changes
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const colors = isDarkRef.current ? DARK_COLORS : LIGHT_COLORS;
+    ptsRef.current = initParticles(canvas.width, canvas.height, colors);
+  }, [isDark]);
+
+
+
   return (
     <div
-      className="fixed inset-0 pointer-events-none"
-      style={{ zIndex: -1, backgroundColor: "#020c18" }}
+      className="fixed inset-0 pointer-events-none transition-colors duration-500"
+      style={{
+        zIndex: -1,
+        backgroundColor: isDark ? "#020c18" : "#f0f4f8",
+      }}
       aria-hidden="true"
     >
       <canvas

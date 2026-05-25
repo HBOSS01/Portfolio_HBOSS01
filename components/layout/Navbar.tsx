@@ -4,6 +4,8 @@ import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import ThemeToggle from "@/components/ui/ThemeToggle";
+import { useIsDark } from "@/hooks/useIsDark";
 
 const NAV_ITEMS = [
   { id: "about", label: "About" },
@@ -19,6 +21,7 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState<SectionId | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
+  const isDark = useIsDark();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 30);
@@ -98,7 +101,9 @@ export default function Navbar() {
         )}
         style={{
           backgroundColor: scrolled
-            ? "rgba(2,12,24,0.78)"
+            ? isDark
+              ? "rgba(2,12,24,0.82)"
+              : "rgba(240,244,248,0.88)"
             : "transparent",
           backdropFilter: scrolled ? "blur(24px)" : "blur(4px)",
           WebkitBackdropFilter: scrolled
@@ -141,11 +146,11 @@ export default function Navbar() {
               </div>
 
               <div className="hidden sm:flex flex-col leading-none gap-1">
-                <span className="text-[10px] text-white/35 font-mono tracking-[0.22em] uppercase">
+                <span className={cn("text-[10px] font-mono tracking-[0.22em] uppercase", isDark ? "text-white/35" : "text-slate-400")}>
                   AI Engineer
                 </span>
 
-                <span className="text-[13px] text-white/75 font-light tracking-[0.12em] uppercase group-hover:text-white transition-colors duration-300">
+                <span className={cn("text-[13px] font-light tracking-[0.12em] uppercase transition-colors duration-300", isDark ? "text-white/75 group-hover:text-white" : "text-slate-600 group-hover:text-slate-900")}>
                   MD F HASNAT
                 </span>
               </div>
@@ -181,13 +186,19 @@ export default function Navbar() {
                 <ArrowUpRight className="w-3.5 h-3.5" />
               </motion.button>
 
+              {/* THEME TOGGLE */}
+              <ThemeToggle />
+
               {/* MOBILE MENU BUTTON */}
               <motion.button
                 onClick={() => setMenuOpen((v) => !v)}
                 whileTap={{ scale: 0.9 }}
-                className="md:hidden w-10 h-10 flex items-center justify-center rounded-lg border text-white/60"
+                className={cn(
+                  "md:hidden w-10 h-10 flex items-center justify-center rounded-lg border",
+                  isDark ? "text-white/60" : "text-slate-500"
+                )}
                 style={{
-                  borderColor: "rgba(255,255,255,0.1)",
+                  borderColor: isDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)",
                 }}
               >
                 <AnimatePresence mode="wait" initial={false}>
@@ -277,7 +288,7 @@ export default function Navbar() {
             }}
             className="fixed inset-0 z-40 md:hidden flex flex-col overflow-hidden"
             style={{
-              backgroundColor: "#020c18",
+              backgroundColor: isDark ? "#020c18" : "#f0f4f8",
             }}
           >
             <div className="relative flex flex-col items-center justify-center flex-1 gap-2 px-8">
@@ -302,7 +313,9 @@ export default function Navbar() {
                     "relative py-4 text-center text-[28px] font-extralight tracking-[0.06em] transition-colors duration-300",
                     activeSection === id
                       ? "text-cyan-400"
-                      : "text-white/45 hover:text-white/85"
+                      : isDark
+                        ? "text-white/45 hover:text-white/85"
+                        : "text-slate-400 hover:text-slate-800"
                   )}
                 >
                   {label}
@@ -326,6 +339,7 @@ function NavLink({
   isActive: boolean;
   onClick: () => void;
 }) {
+  const isDark = useIsDark();
   return (
     <button
       onClick={onClick}
@@ -333,7 +347,9 @@ function NavLink({
         "relative px-3.5 py-2 text-[13.5px] tracking-wide rounded-lg group transition-colors duration-300",
         isActive
           ? "text-cyan-400"
-          : "text-white/45 hover:text-white/85"
+          : isDark
+            ? "text-white/45 hover:text-white/85"
+            : "text-slate-500 hover:text-slate-800"
       )}
     >
       <span className="relative z-10">

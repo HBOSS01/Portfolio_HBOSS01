@@ -1,6 +1,7 @@
 "use client";
 
 import type { LucideIcon } from "lucide-react";
+import { useIsDark } from "@/hooks/useIsDark";
 import { motion } from "framer-motion";
 import {
   Code2,
@@ -117,6 +118,7 @@ const scrollFadeUp = (delay = 0) => ({
 /* ─── Section ───────────────────────────────────────────── */
 
 export default function Skills() {
+  const isDark = useIsDark();
   return (
     <section
       id="skills"
@@ -168,7 +170,7 @@ export default function Skills() {
           </span>
 
           <h2 className="mt-5 text-4xl sm:text-5xl font-bold tracking-tight">
-            <span className="text-white">My </span>
+            <span className={isDark ? "text-white" : "text-slate-900"}>My </span>
             <span
               className="text-transparent bg-clip-text"
               style={{
@@ -188,7 +190,7 @@ export default function Skills() {
             }}
           />
 
-          <p className="mt-5 text-[14.5px] text-white/38 max-w-lg leading-relaxed">
+          <p className={`mt-5 text-[14.5px] max-w-lg leading-relaxed ${isDark ? "text-white/38" : "text-slate-400"}`}>
             A curated set of technologies I use to design, build, and ship
             intelligent AI systems — from research to production.
           </p>
@@ -220,7 +222,7 @@ export default function Skills() {
             <div key={label} className="flex items-center gap-2">
               <div
                 className="relative h-1 w-10 rounded-full overflow-hidden"
-                style={{ backgroundColor: "rgba(255,255,255,0.06)" }}
+                style={{ backgroundColor: isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.08)" }}
               >
                 <div
                   className="absolute inset-y-0 left-0 rounded-full"
@@ -230,7 +232,7 @@ export default function Skills() {
                   }}
                 />
               </div>
-              <span className="text-[11px] text-white/28 font-mono tracking-wide">
+              <span className={`text-[11px] font-mono tracking-wide ${isDark ? "text-white/28" : "text-slate-400"}`}>
                 {label}
               </span>
             </div>
@@ -244,6 +246,7 @@ export default function Skills() {
 /* ─── Category card ─────────────────────────────────────── */
 
 function CategoryCard({ category }: { category: Category }) {
+  const isDark = useIsDark();
   const Icon = category.icon;
 
   const accent = (a: number) =>
@@ -255,7 +258,7 @@ function CategoryCard({ category }: { category: Category }) {
       transition={{ duration: 0.24, ease: "easeOut" }}
       className="relative h-full p-6 rounded-2xl border overflow-hidden cursor-default"
       style={{
-        backgroundColor:  "rgba(255,255,255,0.02)",
+        backgroundColor:  isDark ? "rgba(255,255,255,0.02)" : "rgba(255,255,255,0.75)",
         borderColor:       accent(0.14),
         backdropFilter:   "blur(16px)",
         WebkitBackdropFilter: "blur(16px)",
@@ -287,10 +290,10 @@ function CategoryCard({ category }: { category: Category }) {
             />
           </div>
           <div className="min-w-0">
-            <h3 className="text-[13.5px] font-semibold text-white/75 leading-snug truncate">
+            <h3 className={`text-[13.5px] font-semibold leading-snug truncate ${isDark ? "text-white/75" : "text-slate-700"}`}>
               {category.title}
             </h3>
-            <p className="text-[10.5px] text-white/28 font-mono mt-0.5">
+            <p className={`text-[10.5px] font-mono mt-0.5 ${isDark ? "text-white/28" : "text-slate-400"}`}>
               {category.skills.length} technologies
             </p>
           </div>
@@ -328,14 +331,15 @@ function SkillRow({
   skill: Skill;
   accent: (a: number) => string;
 }) {
+  const isDark = useIsDark();
   return (
     <li className="group flex flex-col gap-1.5">
       <div className="flex items-center justify-between gap-2">
-        <span className="text-[12.5px] text-white/55 leading-none">
+        <span className={`text-[12.5px] leading-none ${isDark ? "text-white/55" : "text-slate-600"}`}>
           {skill.name}
         </span>
         <span
-          className="text-[9.5px] font-mono text-white/20 tracking-wider uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-200 shrink-0"
+          className={`text-[9.5px] font-mono tracking-wider uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-200 shrink-0 ${isDark ? "text-white/20" : "text-slate-400"}`}
           aria-label={`Proficiency: ${skill.level}`}
         >
           {skill.level}
@@ -345,7 +349,7 @@ function SkillRow({
       {/* Animated progress bar */}
       <div
         className="relative h-px w-full rounded-full overflow-hidden"
-        style={{ backgroundColor: "rgba(255,255,255,0.06)" }}
+        style={{ backgroundColor: isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.07)" }}
         role="meter"
         aria-valuenow={LEVEL_PCT[skill.level]}
         aria-valuemin={0}

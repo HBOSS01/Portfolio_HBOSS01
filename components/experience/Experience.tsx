@@ -1,6 +1,7 @@
 "use client";
 
 import type { LucideIcon } from "lucide-react";
+import { useIsDark } from "@/hooks/useIsDark";
 import { motion } from "framer-motion";
 import {
   Brain,
@@ -89,6 +90,7 @@ const ENTRIES: TimelineEntry[] = [
 /* ─── Section ───────────────────────────────────────────── */
 
 export default function Experience() {
+  const isDark = useIsDark();
   return (
     <section
       id="experience"
@@ -138,7 +140,7 @@ export default function Experience() {
           </span>
 
           <h2 className="mt-5 text-4xl sm:text-5xl font-bold tracking-tight">
-            <span className="text-white">My </span>
+            <span className={isDark ? "text-white" : "text-slate-900"}>My </span>
             <span
               className="text-transparent bg-clip-text"
               style={{
@@ -158,7 +160,7 @@ export default function Experience() {
             }}
           />
 
-          <p className="mt-5 text-[14.5px] text-white/38 max-w-lg leading-relaxed">
+          <p className={`mt-5 text-[14.5px] max-w-lg leading-relaxed ${isDark ? "text-white/38" : "text-slate-400"}`}>
             A timeline of research milestones, engineering projects, and
             continuous learning — from foundations to the frontier.
           </p>
@@ -253,11 +255,12 @@ function EntryCard({
   entry: TimelineEntry;
   accent: (a: number) => string;
 }) {
+  const isDark = useIsDark();
   return (
     <div
       className="relative p-5 sm:p-6 rounded-2xl border overflow-hidden"
       style={{
-        backgroundColor:      "rgba(255,255,255,0.02)",
+        backgroundColor:      isDark ? "rgba(255,255,255,0.02)" : "rgba(255,255,255,0.75)",
         borderColor:           accent(0.15),
         backdropFilter:       "blur(16px)",
         WebkitBackdropFilter: "blur(16px)",
@@ -279,7 +282,7 @@ function EntryCard({
 
         {/* Header */}
         <div className="flex items-start justify-between gap-4 flex-wrap">
-          <h3 className="text-[15px] sm:text-[15.5px] font-semibold text-white/80 leading-snug">
+          <h3 className={`text-[15px] sm:text-[15.5px] font-semibold leading-snug ${isDark ? "text-white/80" : "text-slate-800"}`}>
             {entry.title}
           </h3>
 
@@ -304,7 +307,7 @@ function EntryCard({
         />
 
         {/* Description */}
-        <p className="text-[13px] text-white/40 leading-relaxed">
+        <p className={`text-[13px] leading-relaxed ${isDark ? "text-white/40" : "text-slate-500"}`}>
           {entry.description}
         </p>
 
@@ -313,10 +316,10 @@ function EntryCard({
           {entry.tech.map((t) => (
             <span
               key={t}
-              className="px-2 py-0.5 text-[10px] font-mono text-white/35 rounded border"
+              className={`px-2 py-0.5 text-[10px] font-mono rounded border ${isDark ? "text-white/35" : "text-slate-400"}`}
               style={{
-                backgroundColor: "rgba(255,255,255,0.025)",
-                borderColor:     "rgba(255,255,255,0.07)",
+                backgroundColor: isDark ? "rgba(255,255,255,0.025)" : "rgba(0,0,0,0.04)",
+                borderColor:     isDark ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.08)",
               }}
             >
               {t}

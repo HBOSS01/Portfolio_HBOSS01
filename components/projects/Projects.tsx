@@ -1,6 +1,7 @@
 "use client";
 
 import type { ReactNode } from "react";
+import { useIsDark } from "@/hooks/useIsDark";
 import { motion } from "framer-motion";
 import { GitBranch, ExternalLink, Star, Brain } from "lucide-react";
 
@@ -99,6 +100,7 @@ const PROJECTS: Project[] = [
 /* ─── Section ───────────────────────────────────────────── */
 
 export default function Projects() {
+  const isDark = useIsDark();
   const featured = PROJECTS.find((p) => p.featured)!;
   const rest     = PROJECTS.filter((p) => !p.featured);
 
@@ -150,7 +152,7 @@ export default function Projects() {
           </span>
 
           <h2 className="mt-5 text-4xl sm:text-5xl font-bold tracking-tight">
-            <span className="text-white">Featured </span>
+            <span className={isDark ? "text-white" : "text-slate-900"}>Featured </span>
             <span
               className="text-transparent bg-clip-text"
               style={{
@@ -170,7 +172,7 @@ export default function Projects() {
             }}
           />
 
-          <p className="mt-5 text-[14.5px] text-white/38 max-w-lg leading-relaxed">
+          <p className={`mt-5 text-[14.5px] max-w-lg leading-relaxed ${isDark ? "text-white/38" : "text-slate-400"}`}>
             A curated selection of AI research, full-stack applications, and
             engineering projects — from lab to production.
           </p>
@@ -197,6 +199,7 @@ export default function Projects() {
 /* ─── Featured Card ─────────────────────────────────────── */
 
 function FeaturedCard({ project }: { project: Project }) {
+  const isDark = useIsDark();
   const accent = (a: number) => `rgba(${project.accentRgb.join(",")},${a})`;
 
   return (
@@ -205,7 +208,7 @@ function FeaturedCard({ project }: { project: Project }) {
       transition={{ duration: 0.24, ease: "easeOut" }}
       className="relative rounded-2xl border overflow-hidden"
       style={{
-        backgroundColor:      "rgba(255,255,255,0.02)",
+        backgroundColor:      isDark ? "rgba(255,255,255,0.02)" : "rgba(255,255,255,0.8)",
         borderColor:           accent(0.2),
         backdropFilter:       "blur(16px)",
         WebkitBackdropFilter: "blur(16px)",
@@ -241,16 +244,16 @@ function FeaturedCard({ project }: { project: Project }) {
                 <Star className="w-2.5 h-2.5" />
                 Featured
               </span>
-              <span className="text-[11px] text-white/25 font-mono tracking-wide">
+              <span className={`text-[11px] font-mono tracking-wide ${isDark ? "text-white/25" : "text-slate-400"}`}>
                 {project.category}
               </span>
             </div>
 
-            <h3 className="text-2xl sm:text-3xl font-bold text-white leading-tight">
+            <h3 className={`text-2xl sm:text-3xl font-bold leading-tight ${isDark ? "text-white" : "text-slate-900"}`}>
               {project.title}
             </h3>
 
-            <p className="text-[14px] text-white/45 leading-relaxed">
+            <p className={`text-[14px] leading-relaxed ${isDark ? "text-white/45" : "text-slate-500"}`}>
               {project.description}
             </p>
           </div>
@@ -260,10 +263,10 @@ function FeaturedCard({ project }: { project: Project }) {
             {project.tech.map((t) => (
               <span
                 key={t}
-                className="px-2.5 py-1 text-[11px] font-mono text-white/40 rounded-md border"
+                className={`px-2.5 py-1 text-[11px] font-mono rounded-md border ${isDark ? "text-white/40" : "text-slate-500"}`}
                 style={{
-                  backgroundColor: "rgba(255,255,255,0.03)",
-                  borderColor:     "rgba(255,255,255,0.08)",
+                  backgroundColor: isDark ? "rgba(255,255,255,0.03)" : "rgba(0,0,0,0.04)",
+                  borderColor:     isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.09)",
                 }}
               >
                 {t}
@@ -305,17 +308,19 @@ function ProjectVisual({
   accent: (a: number) => string;
   tech: string[];
 }) {
+  const isDark = useIsDark();
   return (
     <div
       className="relative w-full h-full min-h-[340px] flex items-center justify-center"
-      style={{ backgroundColor: "rgba(2,12,24,0.9)" }}
+      style={{ backgroundColor: isDark ? "rgba(2,12,24,0.9)" : "rgba(235,242,250,0.9)" }}
     >
       {/* Dot grid */}
       <div
         className="absolute inset-0"
         style={{
-          backgroundImage:
-            "radial-gradient(rgba(255,255,255,0.055) 1px, transparent 1px)",
+          backgroundImage: isDark
+            ? "radial-gradient(rgba(255,255,255,0.055) 1px, transparent 1px)"
+            : "radial-gradient(rgba(0,0,0,0.06) 1px, transparent 1px)",
           backgroundSize: "24px 24px",
         }}
       />
@@ -352,7 +357,7 @@ function ProjectVisual({
               key={t}
               className="px-3.5 py-1.5 rounded-lg text-[10.5px] font-mono"
               style={{
-                backgroundColor: "rgba(2,12,24,0.92)",
+                backgroundColor: isDark ? "rgba(2,12,24,0.92)" : "rgba(235,242,250,0.95)",
                 border:          `1px solid ${accent(0.18)}`,
                 color:           accent(0.85),
               }}
@@ -374,7 +379,9 @@ function ProjectVisual({
       <div
         className="absolute inset-y-0 left-0 w-10 pointer-events-none"
         style={{
-          background: "linear-gradient(90deg, rgba(2,12,24,0.75), transparent)",
+          background: isDark
+            ? "linear-gradient(90deg, rgba(2,12,24,0.75), transparent)"
+            : "linear-gradient(90deg, rgba(235,242,250,0.75), transparent)",
         }}
       />
     </div>
@@ -384,6 +391,7 @@ function ProjectVisual({
 /* ─── Grid Project Card ──────────────────────────────────── */
 
 function ProjectCard({ project }: { project: Project }) {
+  const isDark = useIsDark();
   const accent = (a: number) => `rgba(${project.accentRgb.join(",")},${a})`;
 
   return (
@@ -392,7 +400,7 @@ function ProjectCard({ project }: { project: Project }) {
       transition={{ duration: 0.24, ease: "easeOut" }}
       className="relative h-full flex flex-col rounded-2xl border overflow-hidden cursor-default"
       style={{
-        backgroundColor:      "rgba(255,255,255,0.02)",
+        backgroundColor:      isDark ? "rgba(255,255,255,0.02)" : "rgba(255,255,255,0.8)",
         borderColor:           accent(0.14),
         backdropFilter:       "blur(16px)",
         WebkitBackdropFilter: "blur(16px)",
@@ -402,7 +410,9 @@ function ProjectCard({ project }: { project: Project }) {
       <div
         className="relative h-[138px] overflow-hidden flex items-center justify-center"
         style={{
-          background:   `linear-gradient(140deg, rgba(2,12,24,0.95) 0%, ${accent(0.09)} 55%, rgba(2,12,24,0.95) 100%)`,
+          background:   isDark
+            ? `linear-gradient(140deg, rgba(2,12,24,0.95) 0%, ${accent(0.09)} 55%, rgba(2,12,24,0.95) 100%)`
+            : `linear-gradient(140deg, rgba(235,242,250,0.95) 0%, ${accent(0.09)} 55%, rgba(235,242,250,0.95) 100%)`,
           borderBottom: `1px solid ${accent(0.1)}`,
         }}
       >
@@ -410,8 +420,9 @@ function ProjectCard({ project }: { project: Project }) {
         <div
           className="absolute inset-0"
           style={{
-            backgroundImage:
-              "radial-gradient(rgba(255,255,255,0.045) 1px, transparent 1px)",
+            backgroundImage: isDark
+            ? "radial-gradient(rgba(255,255,255,0.045) 1px, transparent 1px)"
+            : "radial-gradient(rgba(0,0,0,0.05) 1px, transparent 1px)",
             backgroundSize: "20px 20px",
           }}
         />
@@ -456,10 +467,10 @@ function ProjectCard({ project }: { project: Project }) {
       {/* Content */}
       <div className="flex flex-col gap-4 p-6 flex-1">
         <div className="flex flex-col gap-2">
-          <h3 className="text-[15px] font-semibold text-white/80 leading-snug">
+          <h3 className={`text-[15px] font-semibold leading-snug ${isDark ? "text-white/80" : "text-slate-800"}`}>
             {project.title}
           </h3>
-          <p className="text-[12.5px] text-white/38 leading-relaxed line-clamp-3">
+          <p className={`text-[12.5px] leading-relaxed line-clamp-3 ${isDark ? "text-white/38" : "text-slate-500"}`}>
             {project.description}
           </p>
         </div>
@@ -469,10 +480,10 @@ function ProjectCard({ project }: { project: Project }) {
           {project.tech.slice(0, 4).map((t) => (
             <span
               key={t}
-              className="px-2 py-0.5 text-[10px] font-mono text-white/35 rounded border"
+              className={`px-2 py-0.5 text-[10px] font-mono rounded border ${isDark ? "text-white/35" : "text-slate-400"}`}
               style={{
-                backgroundColor: "rgba(255,255,255,0.025)",
-                borderColor:     "rgba(255,255,255,0.07)",
+                backgroundColor: isDark ? "rgba(255,255,255,0.025)" : "rgba(0,0,0,0.04)",
+                borderColor:     isDark ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.08)",
               }}
             >
               {t}
@@ -495,7 +506,7 @@ function ProjectCard({ project }: { project: Project }) {
         {/* Actions */}
         <div
           className="flex items-center gap-2.5 pt-3 border-t"
-          style={{ borderColor: "rgba(255,255,255,0.05)" }}
+          style={{ borderColor: isDark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.07)" }}
         >
           <ActionButton href={project.github} variant="ghost">
             <GitBranch className="w-3 h-3" />
@@ -514,6 +525,7 @@ function ProjectCard({ project }: { project: Project }) {
 /* ─── Action Button ──────────────────────────────────────── */
 
 function ActionButton({ href, variant, accent, children }: ActionButtonProps) {
+  const isDark = useIsDark();
   return (
     <a
       href={href}
@@ -528,9 +540,9 @@ function ActionButton({ href, variant, accent, children }: ActionButtonProps) {
               border:          `1px solid ${accent(0.22)}`,
             }
           : {
-              backgroundColor: "rgba(255,255,255,0.04)",
-              color:           "rgba(255,255,255,0.5)",
-              border:          "1px solid rgba(255,255,255,0.09)",
+              backgroundColor: isDark ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.04)",
+              color:           isDark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.5)",
+              border:          isDark ? "1px solid rgba(255,255,255,0.09)" : "1px solid rgba(0,0,0,0.09)",
             }
       }
     >

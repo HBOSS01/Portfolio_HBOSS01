@@ -2,6 +2,7 @@
 
 import type { ReactNode } from "react";
 import type { LucideIcon } from "lucide-react";
+import { useIsDark } from "@/hooks/useIsDark";
 import { motion } from "framer-motion";
 import {
   GitBranch,
@@ -59,6 +60,7 @@ const SOCIALS: Social[] = [
 /* ─── Footer ─────────────────────────────────────────────── */
 
 export default function Footer() {
+  const isDark = useIsDark();
   const year = new Date().getFullYear();
 
   return (
@@ -128,16 +130,16 @@ export default function Footer() {
               </div>
 
               <div>
-                <p className="text-[14px] font-semibold text-white/75 leading-none">
+                <p className={`text-[14px] font-semibold leading-none ${isDark ? "text-white/75" : "text-slate-700"}`}>
                   Md Fatin Hasnat
                 </p>
-                <p className="text-[10.5px] text-white/30 font-mono tracking-wider mt-1">
+                <p className={`text-[10.5px] font-mono tracking-wider mt-1 ${isDark ? "text-white/30" : "text-slate-400"}`}>
                   AI Engineer & Researcher
                 </p>
               </div>
             </div>
 
-            <p className="text-[13px] text-white/28 leading-relaxed max-w-[230px]">
+            <p className={`text-[13px] leading-relaxed max-w-[230px] ${isDark ? "text-white/28" : "text-slate-400"}`}>
               Building intelligent systems at the intersection of research and production.
             </p>
 
@@ -168,7 +170,7 @@ export default function Footer() {
             className="md:flex md:justify-center"
           >
             <div className="flex flex-col">
-              <p className="text-[9.5px] font-mono text-white/22 tracking-[0.16em] uppercase mb-4">
+              <p className={`text-[9.5px] font-mono tracking-[0.16em] uppercase mb-4 ${isDark ? "text-white/22" : "text-slate-400"}`}>
                 Navigation
               </p>
               <ul className="flex flex-col gap-0.5" role="list">
@@ -187,7 +189,7 @@ export default function Footer() {
             className="flex flex-col gap-5 md:items-end"
           >
             <div>
-              <p className="text-[9.5px] font-mono text-white/22 tracking-[0.16em] uppercase mb-4 md:text-right">
+              <p className={`text-[9.5px] font-mono tracking-[0.16em] uppercase mb-4 md:text-right ${isDark ? "text-white/22" : "text-slate-400"}`}>
                 Connect
               </p>
               <div className="flex items-center gap-2.5">
@@ -234,14 +236,14 @@ export default function Footer() {
           {...scrollFadeUp(0.28)}
           className="py-5 flex flex-col sm:flex-row items-center justify-between gap-3"
         >
-          <p className="text-[11px] font-mono text-white/20">
+          <p className={`text-[11px] font-mono ${isDark ? "text-white/20" : "text-slate-400"}`}>
             &copy; {year} Md Fatin Hasnat Patwary. All rights reserved.
           </p>
-          <p className="text-[11px] font-mono text-white/16">
+          <p className={`text-[11px] font-mono ${isDark ? "text-white/16" : "text-slate-300"}`}>
             Built with{" "}
-            <span className="text-white/30">Next.js</span>
+            <span className={isDark ? "text-white/30" : "text-slate-500"}>Next.js</span>
             {" & "}
-            <span className="text-white/30">Tailwind CSS</span>
+            <span className={isDark ? "text-white/30" : "text-slate-500"}>Tailwind CSS</span>
           </p>
         </motion.div>
       </div>
@@ -252,12 +254,13 @@ export default function Footer() {
 /* ─── Nav link ───────────────────────────────────────────── */
 
 function NavLink({ href, children }: { href: string; children: ReactNode }) {
+  const isDark = useIsDark();
   return (
     <motion.a
       href={href}
       whileHover={{ x: 3 }}
       transition={{ duration: 0.16, ease: "easeOut" }}
-      className="group flex items-center gap-2 py-1.5 text-[13px] text-white/35 hover:text-white/65 transition-colors duration-200"
+      className={`group flex items-center gap-2 py-1.5 text-[13px] transition-colors duration-200 ${isDark ? "text-white/35 hover:text-white/65" : "text-slate-400 hover:text-slate-700"}`}
     >
       <span
         className="w-0 group-hover:w-1.5 h-px rounded-full shrink-0 transition-all duration-200"
@@ -274,6 +277,7 @@ function NavLink({ href, children }: { href: string; children: ReactNode }) {
 /* ─── Social button ──────────────────────────────────────── */
 
 function SocialButton({ social }: { social: Social }) {
+  const isDark = useIsDark();
   const Icon = social.icon;
   return (
     <motion.a
@@ -291,12 +295,12 @@ function SocialButton({ social }: { social: Social }) {
       transition={{ duration: 0.18, ease: "easeOut" }}
       className="w-9 h-9 rounded-xl flex items-center justify-center border"
       style={{
-        backgroundColor: "rgba(255,255,255,0.03)",
-        borderColor:     "rgba(255,255,255,0.08)",
+        backgroundColor: isDark ? "rgba(255,255,255,0.03)" : "rgba(0,0,0,0.04)",
+        borderColor:     isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.10)",
       }}
       aria-label={social.label}
     >
-      <Icon className="w-4 h-4 text-white/45" />
+      <Icon className={`w-4 h-4 ${isDark ? "text-white/45" : "text-slate-500"}`} />
     </motion.a>
   );
 }

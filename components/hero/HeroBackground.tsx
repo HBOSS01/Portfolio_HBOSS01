@@ -1,8 +1,11 @@
 "use client";
 
+import { useIsDark } from "@/hooks/useIsDark";
 import { motion } from "framer-motion";
 
 export default function HeroBackground() {
+  const isDark = useIsDark();
+
   return (
     <div
       className="absolute inset-0 pointer-events-none overflow-hidden"
@@ -12,10 +15,11 @@ export default function HeroBackground() {
       <div
         className="absolute inset-0"
         style={{
-          backgroundImage:
-            "radial-gradient(rgba(6,182,212,0.45) 1px, transparent 1px)",
+          backgroundImage: isDark
+            ? "radial-gradient(rgba(6,182,212,0.45) 1px, transparent 1px)"
+            : "radial-gradient(rgba(6,182,212,0.3) 1px, transparent 1px)",
           backgroundSize: "40px 40px",
-          opacity: 0.09,
+          opacity: isDark ? 0.09 : 0.07,
         }}
       />
 
@@ -42,8 +46,9 @@ export default function HeroBackground() {
         }}
         className="absolute -top-64 -right-64 w-[900px] h-[900px] rounded-full"
         style={{
-          background:
-            "radial-gradient(circle, rgba(6,182,212,0.11) 0%, transparent 62%)",
+          background: isDark
+            ? "radial-gradient(circle, rgba(6,182,212,0.11) 0%, transparent 62%)"
+            : "radial-gradient(circle, rgba(6,182,212,0.07) 0%, transparent 62%)",
           filter: "blur(40px)",
         }}
       />
@@ -61,8 +66,9 @@ export default function HeroBackground() {
         }}
         className="absolute -bottom-64 -left-64 w-[800px] h-[800px] rounded-full"
         style={{
-          background:
-            "radial-gradient(circle, rgba(56,189,248,0.08) 0%, transparent 65%)",
+          background: isDark
+            ? "radial-gradient(circle, rgba(56,189,248,0.08) 0%, transparent 65%)"
+            : "radial-gradient(circle, rgba(56,189,248,0.05) 0%, transparent 65%)",
           filter: "blur(52px)",
         }}
       />
@@ -72,7 +78,7 @@ export default function HeroBackground() {
         animate={{
           x: [0, 28, -16, 0],
           y: [0, -36, 20, 0],
-          opacity: [0.45, 0.75, 0.45],
+          opacity: isDark ? [0.45, 0.75, 0.45] : [0.3, 0.5, 0.3],
         }}
         transition={{
           duration: 19,
@@ -81,8 +87,9 @@ export default function HeroBackground() {
         }}
         className="absolute top-1/4 -left-32 w-[600px] h-[600px] rounded-full"
         style={{
-          background:
-            "radial-gradient(circle, rgba(129,140,248,0.07) 0%, transparent 70%)",
+          background: isDark
+            ? "radial-gradient(circle, rgba(129,140,248,0.07) 0%, transparent 70%)"
+            : "radial-gradient(circle, rgba(129,140,248,0.05) 0%, transparent 70%)",
           filter: "blur(64px)",
         }}
       />
@@ -91,7 +98,7 @@ export default function HeroBackground() {
       <motion.div
         animate={{
           scale: [1, 1.08, 1],
-          opacity: [0.4, 0.65, 0.4],
+          opacity: isDark ? [0.4, 0.65, 0.4] : [0.25, 0.4, 0.25],
         }}
         transition={{
           duration: 14,
@@ -100,8 +107,7 @@ export default function HeroBackground() {
         }}
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full"
         style={{
-          background:
-            "radial-gradient(circle, rgba(6,182,212,0.045) 0%, transparent 60%)",
+          background: "radial-gradient(circle, rgba(6,182,212,0.045) 0%, transparent 60%)",
           filter: "blur(72px)",
         }}
       />
@@ -139,12 +145,13 @@ export default function HeroBackground() {
         }}
       />
 
-      {/* ── Layer 8: Edge vignette (darkens corners) ────────── */}
+      {/* ── Layer 8: Edge vignette ────────────────────────── */}
       <div
         className="absolute inset-0"
         style={{
-          background:
-            "radial-gradient(ellipse 85% 65% at 50% 50%, transparent 45%, rgba(2,12,24,0.55) 100%)",
+          background: isDark
+            ? "radial-gradient(ellipse 85% 65% at 50% 50%, transparent 45%, rgba(2,12,24,0.55) 100%)"
+            : "radial-gradient(ellipse 85% 65% at 50% 50%, transparent 45%, rgba(240,244,248,0.45) 100%)",
         }}
       />
     </div>

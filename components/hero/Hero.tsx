@@ -3,6 +3,7 @@
 import type { ReactNode } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { useIsDark } from "@/hooks/useIsDark";
 import {
   ArrowRight,
   Mail,
@@ -39,6 +40,8 @@ const fadeUp = (delay = 0) => ({
 });
 
 export default function Hero() {
+  const isDark = useIsDark();
+
   const scrollTo = (id: string) => {
     const el = document.getElementById(id);
 
@@ -79,19 +82,15 @@ export default function Hero() {
               <span
                 className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-medium tracking-wider text-cyan-400 border select-none backdrop-blur-xl"
                 style={{
-                  backgroundColor:
-                    "rgba(6,182,212,0.07)",
-                  borderColor:
-                    "rgba(6,182,212,0.22)",
-                  boxShadow:
-                    "0 0 24px rgba(6,182,212,0.08)",
+                  backgroundColor: "rgba(6,182,212,0.07)",
+                  borderColor: "rgba(6,182,212,0.22)",
+                  boxShadow: "0 0 24px rgba(6,182,212,0.08)",
                 }}
               >
                 <span
                   className="w-1.5 h-1.5 rounded-full bg-cyan-400 shrink-0"
                   style={{
-                    boxShadow:
-                      "0 0 8px rgba(6,182,212,1)",
+                    boxShadow: "0 0 8px rgba(6,182,212,1)",
                   }}
                 />
 
@@ -104,7 +103,7 @@ export default function Hero() {
               {...fadeUp(0.18)}
               className="text-5xl sm:text-6xl lg:text-[72px] font-bold leading-[0.98] tracking-tight"
             >
-              <span className="text-white block">
+              <span className={isDark ? "text-white block" : "text-slate-900 block"}>
                 Md Fatin Hasnat
               </span>
 
@@ -122,15 +121,14 @@ export default function Hero() {
             {/* Subtitle */}
             <motion.p
               {...fadeUp(0.28)}
-              className="text-lg sm:text-xl font-light tracking-[0.04em] text-white/60"
+              className={`text-lg sm:text-xl font-light tracking-[0.04em] ${isDark ? "text-white/60" : "text-slate-500"}`}
             >
               AI Engineer
 
               <span
                 className="inline-flex mx-2.5 w-1.5 h-1.5 rounded-full bg-cyan-400 align-middle"
                 style={{
-                  boxShadow:
-                    "0 0 8px rgba(6,182,212,0.9)",
+                  boxShadow: "0 0 8px rgba(6,182,212,0.9)",
                 }}
               />
 
@@ -140,15 +138,15 @@ export default function Hero() {
             {/* Description */}
             <motion.p
               {...fadeUp(0.37)}
-              className="text-[15px] leading-[1.95] text-white/45 max-w-[560px] mx-auto lg:mx-0"
+              className={`text-[15px] leading-[1.95] max-w-[560px] mx-auto lg:mx-0 ${isDark ? "text-white/45" : "text-slate-400"}`}
             >
               Building intelligent systems at the
               intersection of{" "}
-              <span className="text-white/75">
+              <span className={isDark ? "text-white/75" : "text-slate-600"}>
                 machine learning
               </span>
               ,{" "}
-              <span className="text-white/75">
+              <span className={isDark ? "text-white/75" : "text-slate-600"}>
                 NLP
               </span>
               , and impactful innovation.
@@ -169,12 +167,14 @@ export default function Hero() {
               {TECH_TAGS.map((tag) => (
                 <span
                   key={tag}
-                  className="px-3 py-1.5 text-[10px] font-mono tracking-[0.16em] text-white/35 rounded-lg border backdrop-blur-xl"
+                  className={`px-3 py-1.5 text-[10px] font-mono tracking-[0.16em] rounded-lg border backdrop-blur-xl ${isDark ? "text-white/35" : "text-slate-400"}`}
                   style={{
-                    backgroundColor:
-                      "rgba(255,255,255,0.03)",
-                    borderColor:
-                      "rgba(255,255,255,0.06)",
+                    backgroundColor: isDark
+                      ? "rgba(255,255,255,0.03)"
+                      : "rgba(0,0,0,0.04)",
+                    borderColor: isDark
+                      ? "rgba(255,255,255,0.06)"
+                      : "rgba(0,0,0,0.08)",
                   }}
                 >
                   {tag}
@@ -200,6 +200,7 @@ export default function Hero() {
                 onClick={() =>
                   scrollTo("contact")
                 }
+                isDark={isDark}
               >
                 Contact Me
                 <Mail className="w-4 h-4" />
@@ -224,7 +225,7 @@ export default function Hero() {
             }}
             className="flex items-center justify-center order-1 lg:order-2"
           >
-            <ProfileImageCard />
+            <ProfileImageCard isDark={isDark} />
           </motion.div>
         </div>
       </div>
@@ -239,7 +240,7 @@ export default function Hero() {
         }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5"
       >
-        <span className="text-[9px] font-mono tracking-[0.25em] uppercase text-white/20">
+        <span className={`text-[9px] font-mono tracking-[0.25em] uppercase ${isDark ? "text-white/20" : "text-slate-300"}`}>
           Scroll
         </span>
 
@@ -252,7 +253,7 @@ export default function Hero() {
             ease: "easeInOut",
           }}
         >
-          <ChevronDown className="w-4 h-4 text-white/20" />
+          <ChevronDown className={`w-4 h-4 ${isDark ? "text-white/20" : "text-slate-300"}`} />
         </motion.div>
       </motion.div>
     </section>
@@ -261,7 +262,7 @@ export default function Hero() {
 
 /* PROFILE IMAGE */
 
-function ProfileImageCard() {
+function ProfileImageCard({ isDark }: { isDark: boolean }) {
   return (
     <div className="relative flex items-center justify-center w-72 h-72 sm:w-[430px] sm:h-[430px]">
 
@@ -340,8 +341,9 @@ function ProfileImageCard() {
         <div
           className="absolute top-10 -left-12 px-4 py-2 rounded-xl text-xs border backdrop-blur-xl"
           style={{
-            backgroundColor:
-              "rgba(2,12,24,0.9)",
+            backgroundColor: isDark
+              ? "rgba(2,12,24,0.9)"
+              : "rgba(240,244,248,0.92)",
             borderColor:
               "rgba(6,182,212,0.22)",
             boxShadow:
@@ -361,8 +363,9 @@ function ProfileImageCard() {
         <div
           className="absolute bottom-8 -right-20 px-4 py-2 rounded-xl text-xs border backdrop-blur-xl"
           style={{
-            backgroundColor:
-              "rgba(2,12,24,0.9)",
+            backgroundColor: isDark
+              ? "rgba(2,12,24,0.9)"
+              : "rgba(240,244,248,0.92)",
             borderColor:
               "rgba(129,140,248,0.22)",
             boxShadow:
@@ -411,21 +414,25 @@ function PrimaryButton({
 function SecondaryButton({
   children,
   onClick,
+  isDark,
 }: {
   children: ReactNode;
   onClick?: () => void;
+  isDark: boolean;
 }) {
   return (
     <motion.button
       onClick={onClick}
       whileHover={{ scale: 1.03 }}
       whileTap={{ scale: 0.97 }}
-      className="flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl text-[13.5px] font-medium tracking-wide text-white/65 border backdrop-blur-xl"
+      className={`flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl text-[13.5px] font-medium tracking-wide border backdrop-blur-xl ${isDark ? "text-white/65" : "text-slate-600"}`}
       style={{
-        backgroundColor:
-          "rgba(255,255,255,0.04)",
-        borderColor:
-          "rgba(255,255,255,0.08)",
+        backgroundColor: isDark
+          ? "rgba(255,255,255,0.04)"
+          : "rgba(0,0,0,0.04)",
+        borderColor: isDark
+          ? "rgba(255,255,255,0.08)"
+          : "rgba(0,0,0,0.10)",
       }}
     >
       {children}

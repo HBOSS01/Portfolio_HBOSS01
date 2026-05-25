@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useIsDark } from "@/hooks/useIsDark";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Mail,
@@ -72,6 +73,7 @@ const SOCIAL_LINKS: SocialLink[] = [
 /* ─── Section ───────────────────────────────────────────── */
 
 export default function Contact() {
+  const isDark = useIsDark();
   return (
     <section
       id="contact"
@@ -121,7 +123,7 @@ export default function Contact() {
           </span>
 
           <h2 className="mt-5 text-4xl sm:text-5xl font-bold tracking-tight">
-            <span className="text-white">Contact </span>
+            <span className={isDark ? "text-white" : "text-slate-900"}>Contact </span>
             <span
               className="text-transparent bg-clip-text"
               style={{
@@ -141,7 +143,7 @@ export default function Contact() {
             }}
           />
 
-          <p className="mt-5 text-[14.5px] text-white/38 max-w-lg leading-relaxed">
+          <p className={`mt-5 text-[14.5px] max-w-lg leading-relaxed ${isDark ? "text-white/38" : "text-slate-400"}`}>
             Open to research collaborations, AI engineering roles, and
             interesting project conversations. Let&apos;s build something exceptional.
           </p>
@@ -174,10 +176,10 @@ export default function Contact() {
                   />
                 </div>
                 <div>
-                  <p className="text-[12px] font-medium text-white/65">
+                  <p className={`text-[12px] font-medium ${isDark ? "text-white/65" : "text-slate-700"}`}>
                     Available for opportunities
                   </p>
-                  <p className="text-[10.5px] text-white/30 font-mono mt-0.5">
+                  <p className={`text-[10.5px] font-mono mt-0.5 ${isDark ? "text-white/30" : "text-slate-400"}`}>
                     Open to AI / ML roles & research
                   </p>
                 </div>
@@ -186,16 +188,16 @@ export default function Contact() {
 
             {/* Message */}
             <motion.div {...scrollFadeUp(0.15)} className="flex flex-col gap-3">
-              <p className="text-[15px] leading-[1.9] text-white/50">
+              <p className={`text-[15px] leading-[1.9] ${isDark ? "text-white/50" : "text-slate-500"}`}>
                 I&apos;m{" "}
-                <span className="text-white/80 font-medium">
+                <span className={`font-medium ${isDark ? "text-white/80" : "text-slate-800"}`}>
                   Md Fatin Hasnat Patwary
                 </span>
                 , an AI Engineer & Researcher passionate about building
                 intelligent systems that matter. Whether it&apos;s a research
                 collaboration, a challenging engineering role, or just an
                 interesting idea —{" "}
-                <span className="text-white/70">I&apos;m always open to a conversation.</span>
+                <span className={isDark ? "text-white/70" : "text-slate-700"}>I&apos;m always open to a conversation.</span>
               </p>
             </motion.div>
 
@@ -213,7 +215,7 @@ export default function Contact() {
                   >
                     <Icon className="w-3.5 h-3.5 text-cyan-400" />
                   </div>
-                  <span className="text-[13px] text-white/45 font-mono">
+                  <span className={`text-[13px] font-mono ${isDark ? "text-white/45" : "text-slate-500"}`}>
                     {text}
                   </span>
                 </div>
@@ -232,7 +234,7 @@ export default function Contact() {
 
             {/* Social links */}
             <motion.div {...scrollFadeUp(0.28)}>
-              <p className="text-[11px] text-white/28 font-mono tracking-[0.16em] uppercase mb-4">
+              <p className={`text-[11px] font-mono tracking-[0.16em] uppercase mb-4 ${isDark ? "text-white/28" : "text-slate-400"}`}>
                 Find me on
               </p>
               <div className="grid grid-cols-2 gap-3">
@@ -256,6 +258,7 @@ export default function Contact() {
 /* ─── Social card ────────────────────────────────────────── */
 
 function SocialCard({ link }: { link: SocialLink }) {
+  const isDark = useIsDark();
   const Icon   = link.icon;
   const accent = (a: number) => `rgba(${link.accentRgb.join(",")},${a})`;
 
@@ -268,7 +271,7 @@ function SocialCard({ link }: { link: SocialLink }) {
       transition={{ duration: 0.2, ease: "easeOut" }}
       className="flex items-center gap-3 p-3.5 rounded-xl border"
       style={{
-        backgroundColor:      "rgba(255,255,255,0.02)",
+        backgroundColor:      isDark ? "rgba(255,255,255,0.02)" : "rgba(255,255,255,0.7)",
         borderColor:           accent(0.16),
         backdropFilter:       "blur(12px)",
         WebkitBackdropFilter: "blur(12px)",
@@ -283,7 +286,7 @@ function SocialCard({ link }: { link: SocialLink }) {
       >
         <Icon className="w-3.5 h-3.5" style={{ color: accent(1) }} />
       </div>
-      <span className="text-[12.5px] text-white/55 font-medium">
+      <span className={`text-[12.5px] font-medium ${isDark ? "text-white/55" : "text-slate-600"}`}>
         {link.label}
       </span>
     </motion.a>
@@ -293,6 +296,7 @@ function SocialCard({ link }: { link: SocialLink }) {
 /* ─── Contact form ───────────────────────────────────────── */
 
 function ContactForm() {
+  const isDark = useIsDark();
   const [form, setForm]       = useState<FormState>({ name: "", email: "", subject: "", message: "" });
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading]     = useState(false);
@@ -315,7 +319,7 @@ function ContactForm() {
     <div
       className="relative p-7 sm:p-8 rounded-3xl border overflow-hidden"
       style={{
-        backgroundColor:      "rgba(255,255,255,0.02)",
+        backgroundColor:      isDark ? "rgba(255,255,255,0.02)" : "rgba(255,255,255,0.8)",
         borderColor:           "rgba(6,182,212,0.15)",
         backdropFilter:       "blur(20px)",
         WebkitBackdropFilter: "blur(20px)",
@@ -364,10 +368,10 @@ function ContactForm() {
               <CheckCircle className="w-7 h-7 text-cyan-400" />
             </div>
             <div>
-              <p className="text-[17px] font-semibold text-white/80 mb-1.5">
+              <p className={`text-[17px] font-semibold mb-1.5 ${isDark ? "text-white/80" : "text-slate-800"}`}>
                 Message sent!
               </p>
-              <p className="text-[13px] text-white/38 max-w-xs leading-relaxed">
+              <p className={`text-[13px] max-w-xs leading-relaxed ${isDark ? "text-white/38" : "text-slate-500"}`}>
                 Thanks for reaching out. I&apos;ll get back to you within 24 hours.
               </p>
             </div>
@@ -390,7 +394,7 @@ function ContactForm() {
             aria-label="Contact form"
           >
             <div className="mb-1">
-              <p className="text-[13px] font-semibold text-white/55 tracking-wide">
+              <p className={`text-[13px] font-semibold tracking-wide ${isDark ? "text-white/55" : "text-slate-600"}`}>
                 Send a message
               </p>
               <div
@@ -450,10 +454,10 @@ function ContactForm() {
                 value={form.message}
                 onChange={handleChange}
                 required
-                className="w-full resize-none rounded-xl px-4 py-3 text-[13px] text-white/65 placeholder:text-white/18 outline-none transition-all duration-200 focus:border-cyan-400/40"
+                className={`w-full resize-none rounded-xl px-4 py-3 text-[13px] placeholder:text-white/18 outline-none transition-all duration-200 focus:border-cyan-400/40 ${isDark ? "text-white/65" : "text-slate-700"}`}
                 style={{
-                  backgroundColor: "rgba(255,255,255,0.03)",
-                  border:          "1px solid rgba(255,255,255,0.08)",
+                  backgroundColor: isDark ? "rgba(255,255,255,0.03)" : "rgba(0,0,0,0.03)",
+                  border:          isDark ? "1px solid rgba(255,255,255,0.08)" : "1px solid rgba(0,0,0,0.08)",
                 }}
               />
             </div>
@@ -465,7 +469,7 @@ function ContactForm() {
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               transition={{ duration: 0.18 }}
-              className="relative flex items-center justify-center gap-2.5 w-full py-3.5 rounded-xl text-[13.5px] font-semibold tracking-wide text-[#020c18] overflow-hidden mt-1"
+              className={`relative flex items-center justify-center gap-2.5 w-full py-3.5 rounded-xl text-[13.5px] font-semibold tracking-wide overflow-hidden mt-1 ${isDark ? "text-[#020c18]" : "text-white"}`}
               style={{
                 backgroundColor: "#22d3ee",
                 boxShadow:       loading
@@ -518,17 +522,18 @@ function Field({
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   required?: boolean;
 }) {
+  const isDark = useIsDark();
   return (
     <div className="flex flex-col gap-1.5">
       <label
         htmlFor={name}
-        className="text-[11px] font-mono text-white/35 tracking-[0.12em] uppercase"
+        className={`text-[11px] font-mono tracking-[0.12em] uppercase ${isDark ? "text-white/35" : "text-slate-400"}`}
       >
         {label}
       </label>
       <div className="relative">
         <Icon
-          className="absolute left-3.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-white/20 pointer-events-none"
+          className={`absolute left-3.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 pointer-events-none ${isDark ? "text-white/20" : "text-slate-400"}`}
         />
         <input
           id={name}
@@ -538,10 +543,10 @@ function Field({
           value={value}
           onChange={onChange}
           required={required}
-          className="w-full rounded-xl pl-9 pr-4 py-3 text-[13px] text-white/65 placeholder:text-white/18 outline-none transition-all duration-200 focus:border-cyan-400/40"
+          className={`w-full rounded-xl pl-9 pr-4 py-3 text-[13px] placeholder:text-white/18 outline-none transition-all duration-200 focus:border-cyan-400/40 ${isDark ? "text-white/65" : "text-slate-700"}`}
           style={{
-            backgroundColor: "rgba(255,255,255,0.03)",
-            border:          "1px solid rgba(255,255,255,0.08)",
+            backgroundColor: isDark ? "rgba(255,255,255,0.03)" : "rgba(0,0,0,0.03)",
+            border:          isDark ? "1px solid rgba(255,255,255,0.08)" : "1px solid rgba(0,0,0,0.08)",
           }}
         />
       </div>
