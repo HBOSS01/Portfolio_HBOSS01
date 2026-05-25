@@ -13,8 +13,8 @@ interface Particle {
 
 const DARK_COLORS   = ["#22d3ee", "#818cf8"];
 const LIGHT_COLORS  = ["#06b6d4", "#6366f1"];
-const COUNT         = 35;
-const LINK_DIST     = 130;
+const COUNT         = 55;
+const LINK_DIST     = 180;
 const LINK_DIST_SQ  = LINK_DIST * LINK_DIST;
 const MAX_SPEED     = 1.2;
 const REPEL_RADIUS  = 100;
@@ -36,7 +36,8 @@ function initParticles(w: number, h: number, colors: string[]): Particle[] {
     { x: [w-margin, w],      y: [h-margin, h]      },
   ];
 
-  for (let i = 0; i < 8; i++) {
+  // 12 corner-biased
+  for (let i = 0; i < 12; i++) {
     const c = corners[i % 4];
     list.push({
       x: rand(c.x[0], c.x[1]), y: rand(c.y[0], c.y[1]),
@@ -45,10 +46,26 @@ function initParticles(w: number, h: number, colors: string[]): Particle[] {
     });
   }
 
-  for (let i = 0; i < COUNT - 8; i++) {
+  // 8 edge-biased
+  for (let i = 0; i < 8; i++) {
+    const side = Math.floor(Math.random() * 4);
+    let x = 0, y = 0;
+    if (side === 0) { x = rand(0, w);      y = rand(0, 80);      }
+    if (side === 1) { x = rand(0, w);      y = rand(h-80, h);    }
+    if (side === 2) { x = rand(0, 80);     y = rand(0, h);       }
+    if (side === 3) { x = rand(w-80, w);   y = rand(0, h);       }
     list.push({
-      x: rand(0, w),         y: rand(0, h),
+      x, y,
       vx: rand(-0.25, 0.25), vy: rand(-0.25, 0.25),
+      color: colors[Math.random() < 0.5 ? 0 : 1],
+    });
+  }
+
+  // 35 fully random
+  for (let i = 0; i < COUNT - 20; i++) {
+    list.push({
+      x: rand(0, w),          y: rand(0, h),
+      vx: rand(-0.25, 0.25),  vy: rand(-0.25, 0.25),
       color: colors[Math.random() < 0.5 ? 0 : 1],
     });
   }
