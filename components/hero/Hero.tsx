@@ -286,8 +286,8 @@ function ProfileImageCard({ isDark }: { isDark: boolean }) {
         }}
         className="absolute inset-0 rounded-full"
         style={{
-          border:
-            "1px dashed rgba(6,182,212,0.18)",
+          border: "1px dashed rgba(6,182,212,0.18)",
+          willChange: "transform",
         }}
       />
 
@@ -301,8 +301,8 @@ function ProfileImageCard({ isDark }: { isDark: boolean }) {
         }}
         className="absolute top-8 right-8 bottom-8 left-8 rounded-full"
         style={{
-          border:
-            "1px dashed rgba(129,140,248,0.16)",
+          border: "1px dashed rgba(129,140,248,0.16)",
+          willChange: "transform",
         }}
       />
 
@@ -316,6 +316,7 @@ function ProfileImageCard({ isDark }: { isDark: boolean }) {
           ease: "easeInOut",
         }}
         className="relative z-10"
+        style={{ willChange: "transform" }}
       >
 
         {/* Image */}

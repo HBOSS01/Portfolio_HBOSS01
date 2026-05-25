@@ -190,7 +190,7 @@ export default function Skills() {
             }}
           />
 
-          <p className={`mt-5 text-[14.5px] max-w-lg leading-relaxed ${isDark ? "text-white/38" : "text-slate-400"}`}>
+          <p className={`mt-5 text-[14.5px] max-w-lg leading-relaxed ${isDark ? "text-white/38" : "text-slate-500"}`}>
             A curated set of technologies I use to design, build, and ship
             intelligent AI systems — from research to production.
           </p>
@@ -232,7 +232,7 @@ export default function Skills() {
                   }}
                 />
               </div>
-              <span className={`text-[11px] font-mono tracking-wide ${isDark ? "text-white/28" : "text-slate-400"}`}>
+              <span className={`text-[11px] font-mono tracking-wide ${isDark ? "text-white/28" : "text-slate-500"}`}>
                 {label}
               </span>
             </div>
@@ -293,7 +293,7 @@ function CategoryCard({ category }: { category: Category }) {
             <h3 className={`text-[13.5px] font-semibold leading-snug truncate ${isDark ? "text-white/75" : "text-slate-700"}`}>
               {category.title}
             </h3>
-            <p className={`text-[10.5px] font-mono mt-0.5 ${isDark ? "text-white/28" : "text-slate-400"}`}>
+            <p className={`text-[10.5px] font-mono mt-0.5 ${isDark ? "text-white/28" : "text-slate-500"}`}>
               {category.skills.length} technologies
             </p>
           </div>

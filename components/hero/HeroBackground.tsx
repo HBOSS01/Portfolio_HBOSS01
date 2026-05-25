@@ -36,83 +36,44 @@ export default function HeroBackground() {
       {/* ── Layer 2: Cyan blob — top right ─────────────────── */}
       <motion.div
         animate={{
-          x: [0, 48, 16, -24, 0],
-          y: [0, -28, 36, -12, 0],
+          x: [0, 40, 12, -20, 0],
+          y: [0, -24, 28, -10, 0],
         }}
         transition={{
-          duration: 22,
+          duration: 24,
           repeat: Infinity,
           ease: "easeInOut",
         }}
-        className="absolute -top-64 -right-64 w-[900px] h-[900px] rounded-full"
+        className="absolute -top-64 -right-64 w-[800px] h-[800px] rounded-full"
         style={{
           background: isDark
-            ? "radial-gradient(circle, rgba(6,182,212,0.11) 0%, transparent 62%)"
-            : "radial-gradient(circle, rgba(6,182,212,0.07) 0%, transparent 62%)",
-          filter: "blur(40px)",
+            ? "radial-gradient(circle, rgba(6,182,212,0.10) 0%, transparent 62%)"
+            : "radial-gradient(circle, rgba(6,182,212,0.06) 0%, transparent 62%)",
+          filter: "blur(28px)",
+          willChange: "transform",
         }}
       />
 
-      {/* ── Layer 3: Sky-blue blob — bottom left ───────────── */}
+      {/* ── Layer 3: Core center glow pulse ────────────────── */}
       <motion.div
         animate={{
-          x: [0, -44, 20, 0],
-          y: [0, 32, -18, 0],
+          scale: [1, 1.06, 1],
+          opacity: isDark ? [0.4, 0.6, 0.4] : [0.22, 0.36, 0.22],
         }}
         transition={{
-          duration: 28,
+          duration: 12,
           repeat: Infinity,
           ease: "easeInOut",
         }}
-        className="absolute -bottom-64 -left-64 w-[800px] h-[800px] rounded-full"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full"
         style={{
-          background: isDark
-            ? "radial-gradient(circle, rgba(56,189,248,0.08) 0%, transparent 65%)"
-            : "radial-gradient(circle, rgba(56,189,248,0.05) 0%, transparent 65%)",
-          filter: "blur(52px)",
+          background: "radial-gradient(circle, rgba(6,182,212,0.04) 0%, transparent 60%)",
+          filter: "blur(48px)",
+          willChange: "transform, opacity",
         }}
       />
 
-      {/* ── Layer 4: Indigo accent — left center ───────────── */}
-      <motion.div
-        animate={{
-          x: [0, 28, -16, 0],
-          y: [0, -36, 20, 0],
-          opacity: isDark ? [0.45, 0.75, 0.45] : [0.3, 0.5, 0.3],
-        }}
-        transition={{
-          duration: 19,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-        className="absolute top-1/4 -left-32 w-[600px] h-[600px] rounded-full"
-        style={{
-          background: isDark
-            ? "radial-gradient(circle, rgba(129,140,248,0.07) 0%, transparent 70%)"
-            : "radial-gradient(circle, rgba(129,140,248,0.05) 0%, transparent 70%)",
-          filter: "blur(64px)",
-        }}
-      />
-
-      {/* ── Layer 5: Core center glow pulse ────────────────── */}
-      <motion.div
-        animate={{
-          scale: [1, 1.08, 1],
-          opacity: isDark ? [0.4, 0.65, 0.4] : [0.25, 0.4, 0.25],
-        }}
-        transition={{
-          duration: 14,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full"
-        style={{
-          background: "radial-gradient(circle, rgba(6,182,212,0.045) 0%, transparent 60%)",
-          filter: "blur(72px)",
-        }}
-      />
-
-      {/* ── Layer 6: Horizontal light sweep ────────────────── */}
+      {/* ── Layer 4: Horizontal light sweep ────────────────── */}
       <motion.div
         animate={{ x: ["-110%", "210%"] }}
         transition={{
@@ -125,10 +86,11 @@ export default function HeroBackground() {
         style={{
           background:
             "linear-gradient(90deg, transparent 0%, rgba(6,182,212,0.28) 50%, transparent 100%)",
+          willChange: "transform",
         }}
       />
 
-      {/* ── Layer 7: Secondary sweep (offset phase) ─────────── */}
+      {/* ── Layer 5: Secondary sweep (offset phase) ─────────── */}
       <motion.div
         animate={{ x: ["210%", "-110%"] }}
         transition={{
@@ -142,10 +104,11 @@ export default function HeroBackground() {
         style={{
           background:
             "linear-gradient(90deg, transparent 0%, rgba(56,189,248,0.18) 50%, transparent 100%)",
+          willChange: "transform",
         }}
       />
 
-      {/* ── Layer 8: Edge vignette ────────────────────────── */}
+      {/* ── Layer 6: Edge vignette ────────────────────────── */}
       <div
         className="absolute inset-0"
         style={{

@@ -143,7 +143,7 @@ export default function Contact() {
             }}
           />
 
-          <p className={`mt-5 text-[14.5px] max-w-lg leading-relaxed ${isDark ? "text-white/38" : "text-slate-400"}`}>
+          <p className={`mt-5 text-[14.5px] max-w-lg leading-relaxed ${isDark ? "text-white/38" : "text-slate-500"}`}>
             Open to research collaborations, AI engineering roles, and
             interesting project conversations. Let&apos;s build something exceptional.
           </p>
@@ -179,7 +179,7 @@ export default function Contact() {
                   <p className={`text-[12px] font-medium ${isDark ? "text-white/65" : "text-slate-700"}`}>
                     Available for opportunities
                   </p>
-                  <p className={`text-[10.5px] font-mono mt-0.5 ${isDark ? "text-white/30" : "text-slate-400"}`}>
+                  <p className={`text-[10.5px] font-mono mt-0.5 ${isDark ? "text-white/30" : "text-slate-500"}`}>
                     Open to AI / ML roles & research
                   </p>
                 </div>
@@ -234,7 +234,7 @@ export default function Contact() {
 
             {/* Social links */}
             <motion.div {...scrollFadeUp(0.28)}>
-              <p className={`text-[11px] font-mono tracking-[0.16em] uppercase mb-4 ${isDark ? "text-white/28" : "text-slate-400"}`}>
+              <p className={`text-[11px] font-mono tracking-[0.16em] uppercase mb-4 ${isDark ? "text-white/28" : "text-slate-500"}`}>
                 Find me on
               </p>
               <div className="grid grid-cols-2 gap-3">
@@ -307,7 +307,7 @@ function ContactForm() {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
     await new Promise((r) => setTimeout(r, 1200));
@@ -444,7 +444,7 @@ function ContactForm() {
 
             {/* Message */}
             <div className="flex flex-col gap-1.5">
-              <label className="text-[11px] font-mono text-white/35 tracking-[0.12em] uppercase">
+              <label className={`text-[11px] font-mono tracking-[0.12em] uppercase ${isDark ? "text-white/35" : "text-slate-500"}`}>
                 Message
               </label>
               <textarea
@@ -454,7 +454,7 @@ function ContactForm() {
                 value={form.message}
                 onChange={handleChange}
                 required
-                className={`w-full resize-none rounded-xl px-4 py-3 text-[13px] placeholder:text-white/18 outline-none transition-all duration-200 focus:border-cyan-400/40 ${isDark ? "text-white/65" : "text-slate-700"}`}
+                className={`w-full resize-none rounded-xl px-4 py-3 text-[13px] ${isDark ? "placeholder:text-white/18" : "placeholder:text-slate-400"} outline-none transition-all duration-200 focus:border-cyan-400/40 ${isDark ? "text-white/65" : "text-slate-700"}`}
                 style={{
                   backgroundColor: isDark ? "rgba(255,255,255,0.03)" : "rgba(0,0,0,0.03)",
                   border:          isDark ? "1px solid rgba(255,255,255,0.08)" : "1px solid rgba(0,0,0,0.08)",
@@ -543,7 +543,7 @@ function Field({
           value={value}
           onChange={onChange}
           required={required}
-          className={`w-full rounded-xl pl-9 pr-4 py-3 text-[13px] placeholder:text-white/18 outline-none transition-all duration-200 focus:border-cyan-400/40 ${isDark ? "text-white/65" : "text-slate-700"}`}
+          className={`w-full rounded-xl pl-9 pr-4 py-3 text-[13px] ${isDark ? "placeholder:text-white/18" : "placeholder:text-slate-400"} outline-none transition-all duration-200 focus:border-cyan-400/40 ${isDark ? "text-white/65" : "text-slate-700"}`}
           style={{
             backgroundColor: isDark ? "rgba(255,255,255,0.03)" : "rgba(0,0,0,0.03)",
             border:          isDark ? "1px solid rgba(255,255,255,0.08)" : "1px solid rgba(0,0,0,0.08)",

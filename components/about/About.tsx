@@ -136,7 +136,7 @@ export default function About() {
 
             {/* Bio paragraphs */}
             <motion.div {...scrollFadeUp(0.1)} className="flex flex-col gap-4">
-              <p className={`text-[15px] leading-[1.9] ${isDark ? "text-white/50" : "text-slate-400"}`}>
+              <p className={`text-[15px] leading-[1.9] ${isDark ? "text-white/50" : "text-slate-600"}`}>
                 I&apos;m{" "}
                 <span className={`font-medium ${isDark ? "text-white/80" : "text-slate-700"}`}>
                   Md Fatin Hasnat Patwary
@@ -152,7 +152,7 @@ export default function About() {
                 <span className={isDark ? "text-white/70" : "text-slate-600"}>computer vision</span> —
                 bridging cutting-edge research with real-world engineering.
               </p>
-              <p className={`text-[15px] leading-[1.9] ${isDark ? "text-white/40" : "text-slate-400"}`}>
+              <p className={`text-[15px] leading-[1.9] ${isDark ? "text-white/40" : "text-slate-500"}`}>
                 I thrive at the intersection of innovation and precision —
                 whether fine-tuning large language models, designing RAG
                 pipelines, or training end-to-end computer vision
@@ -180,7 +180,7 @@ export default function About() {
                 <p className={`text-[13px] font-medium mb-1 ${isDark ? "text-white/65" : "text-slate-600"}`}>
                   What drives me
                 </p>
-                <p className={`text-[13px] leading-relaxed ${isDark ? "text-white/38" : "text-slate-400"}`}>
+                <p className={`text-[13px] leading-relaxed ${isDark ? "text-white/38" : "text-slate-500"}`}>
                   Building AI that doesn&apos;t just perform — but understands,
                   adapts, and empowers. Research-first thinking, production-grade
                   execution.
@@ -249,7 +249,7 @@ function StatCard({
           {value}
         </span>
       </div>
-      <span className={`text-[11.5px] tracking-wide leading-snug ${isDark ? "text-white/40" : "text-slate-400"}`}>
+      <span className={`text-[11.5px] tracking-wide leading-snug ${isDark ? "text-white/40" : "text-slate-500"}`}>
         {label}
       </span>
     </motion.div>
@@ -331,7 +331,7 @@ function GlassCard() {
         <section aria-label="Stack highlights">
           <div className="flex items-center gap-2 mb-4">
             <Cpu className="w-4 h-4 text-cyan-400 shrink-0" />
-            <h3 className="text-[12px] font-semibold text-white/55 tracking-[0.12em] uppercase">
+            <h3 className={`text-[12px] font-semibold tracking-[0.12em] uppercase ${isDark ? "text-white/55" : "text-slate-600"}`}>
               Stack Highlights
             </h3>
           </div>
@@ -340,7 +340,7 @@ function GlassCard() {
               <li key={h.label} className="flex items-start gap-2.5">
                 <ChevronRight className="w-3.5 h-3.5 text-cyan-400 mt-0.5 shrink-0" />
                 <div>
-                  <p className={`text-[10.5px] tracking-[0.15em] uppercase font-mono mb-0.5 ${isDark ? "text-white/30" : "text-slate-400"}`}>
+                  <p className={`text-[10.5px] tracking-[0.15em] uppercase font-mono mb-0.5 ${isDark ? "text-white/30" : "text-slate-500"}`}>
                     {h.label}
                   </p>
                   <p className={`text-[13.5px] leading-snug ${isDark ? "text-white/60" : "text-slate-600"}`}>
@@ -378,7 +378,7 @@ function GlassCard() {
               Currently
             </span>
           </span>
-          <p className={`text-[13px] leading-snug ${isDark ? "text-white/40" : "text-slate-400"}`}>
+          <p className={`text-[13px] leading-snug ${isDark ? "text-white/40" : "text-slate-500"}`}>
             Researching{" "}
             <span className={isDark ? "text-white/60" : "text-slate-600"}>multimodal AI</span> and building
             production LLM systems

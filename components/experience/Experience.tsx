@@ -160,7 +160,7 @@ export default function Experience() {
             }}
           />
 
-          <p className={`mt-5 text-[14.5px] max-w-lg leading-relaxed ${isDark ? "text-white/38" : "text-slate-400"}`}>
+          <p className={`mt-5 text-[14.5px] max-w-lg leading-relaxed ${isDark ? "text-white/38" : "text-slate-500"}`}>
             A timeline of research milestones, engineering projects, and
             continuous learning — from foundations to the frontier.
           </p>
@@ -316,7 +316,7 @@ function EntryCard({
           {entry.tech.map((t) => (
             <span
               key={t}
-              className={`px-2 py-0.5 text-[10px] font-mono rounded border ${isDark ? "text-white/35" : "text-slate-400"}`}
+              className={`px-2 py-0.5 text-[10px] font-mono rounded border ${isDark ? "text-white/35" : "text-slate-500"}`}
               style={{
                 backgroundColor: isDark ? "rgba(255,255,255,0.025)" : "rgba(0,0,0,0.04)",
                 borderColor:     isDark ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.08)",

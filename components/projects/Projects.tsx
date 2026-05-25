@@ -172,7 +172,7 @@ export default function Projects() {
             }}
           />
 
-          <p className={`mt-5 text-[14.5px] max-w-lg leading-relaxed ${isDark ? "text-white/38" : "text-slate-400"}`}>
+          <p className={`mt-5 text-[14.5px] max-w-lg leading-relaxed ${isDark ? "text-white/38" : "text-slate-500"}`}>
             A curated selection of AI research, full-stack applications, and
             engineering projects — from lab to production.
           </p>
@@ -244,7 +244,7 @@ function FeaturedCard({ project }: { project: Project }) {
                 <Star className="w-2.5 h-2.5" />
                 Featured
               </span>
-              <span className={`text-[11px] font-mono tracking-wide ${isDark ? "text-white/25" : "text-slate-400"}`}>
+              <span className={`text-[11px] font-mono tracking-wide ${isDark ? "text-white/25" : "text-slate-500"}`}>
                 {project.category}
               </span>
             </div>
@@ -480,7 +480,7 @@ function ProjectCard({ project }: { project: Project }) {
           {project.tech.slice(0, 4).map((t) => (
             <span
               key={t}
-              className={`px-2 py-0.5 text-[10px] font-mono rounded border ${isDark ? "text-white/35" : "text-slate-400"}`}
+              className={`px-2 py-0.5 text-[10px] font-mono rounded border ${isDark ? "text-white/35" : "text-slate-500"}`}
               style={{
                 backgroundColor: isDark ? "rgba(255,255,255,0.025)" : "rgba(0,0,0,0.04)",
                 borderColor:     isDark ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.08)",

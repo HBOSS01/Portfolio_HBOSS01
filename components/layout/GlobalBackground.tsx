@@ -11,12 +11,14 @@ interface Particle {
   color: string;
 }
 
-const DARK_COLORS  = ["#22d3ee", "#818cf8"];
-const LIGHT_COLORS = ["#06b6d4", "#6366f1"];
-const COUNT         = 55;
-const LINK_DIST     = 180;
+const DARK_COLORS   = ["#22d3ee", "#818cf8"];
+const LIGHT_COLORS  = ["#06b6d4", "#6366f1"];
+const COUNT         = 35;
+const LINK_DIST     = 130;
+const LINK_DIST_SQ  = LINK_DIST * LINK_DIST;
 const MAX_SPEED     = 1.2;
 const REPEL_RADIUS  = 100;
+const REPEL_RADIUS_SQ = REPEL_RADIUS * REPEL_RADIUS;
 const REPEL_FORCE   = 0.012;
 
 function rand(a: number, b: number) {
@@ -34,8 +36,7 @@ function initParticles(w: number, h: number, colors: string[]): Particle[] {
     { x: [w-margin, w],      y: [h-margin, h]      },
   ];
 
-  // 12 corner-biased
-  for (let i = 0; i < 12; i++) {
+  for (let i = 0; i < 8; i++) {
     const c = corners[i % 4];
     list.push({
       x: rand(c.x[0], c.x[1]), y: rand(c.y[0], c.y[1]),
@@ -44,26 +45,10 @@ function initParticles(w: number, h: number, colors: string[]): Particle[] {
     });
   }
 
-  // 8 edge-biased
-  for (let i = 0; i < 8; i++) {
-    const side = Math.floor(Math.random() * 4);
-    let x = 0, y = 0;
-    if (side === 0) { x = rand(0, w);      y = rand(0, 80);      }
-    if (side === 1) { x = rand(0, w);      y = rand(h-80, h);    }
-    if (side === 2) { x = rand(0, 80);     y = rand(0, h);       }
-    if (side === 3) { x = rand(w-80, w);   y = rand(0, h);       }
+  for (let i = 0; i < COUNT - 8; i++) {
     list.push({
-      x, y,
+      x: rand(0, w),         y: rand(0, h),
       vx: rand(-0.25, 0.25), vy: rand(-0.25, 0.25),
-      color: colors[Math.random() < 0.5 ? 0 : 1],
-    });
-  }
-
-  // 35 fully random
-  for (let i = 0; i < COUNT - 20; i++) {
-    list.push({
-      x: rand(0, w),          y: rand(0, h),
-      vx: rand(-0.25, 0.25),  vy: rand(-0.25, 0.25),
       color: colors[Math.random() < 0.5 ? 0 : 1],
     });
   }
@@ -76,10 +61,9 @@ export default function GlobalBackground() {
   const mouseRef   = useRef({ x: -9999, y: -9999 });
   const rafRef     = useRef<number>(0);
   const ptsRef     = useRef<Particle[]>([]);
+  const pausedRef  = useRef(false);
   const isDark = useIsDark();
-
-  // Track isDark in a ref so the animation loop can read the latest value
-  const isDarkRef = useRef(true);
+  const isDarkRef  = useRef(true);
 
   useEffect(() => {
     isDarkRef.current = isDark;
@@ -104,21 +88,24 @@ export default function GlobalBackground() {
     }
 
     function frame() {
-      if (!canvas || !ctx) return;
-      const w  = canvas.width;
-      const h  = canvas.height;
-      const mx = mouseRef.current.x;
-      const my = mouseRef.current.y;
+      rafRef.current = requestAnimationFrame(frame);
+      if (pausedRef.current || !canvas || !ctx) return;
+
+      const w   = canvas.width;
+      const h   = canvas.height;
+      const mx  = mouseRef.current.x;
+      const my  = mouseRef.current.y;
       const pts = ptsRef.current;
 
       ctx.clearRect(0, 0, w, h);
 
-      // Update
+      // Update positions
       for (const p of pts) {
-        const dx   = p.x - mx;
-        const dy   = p.y - my;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < REPEL_RADIUS && dist > 0) {
+        const dx  = p.x - mx;
+        const dy  = p.y - my;
+        const dSq = dx * dx + dy * dy;
+        if (dSq < REPEL_RADIUS_SQ && dSq > 0) {
+          const dist  = Math.sqrt(dSq);
           const force = ((REPEL_RADIUS - dist) / REPEL_RADIUS) * REPEL_FORCE;
           p.vx += (dx / dist) * force;
           p.vy += (dy / dist) * force;
@@ -136,16 +123,16 @@ export default function GlobalBackground() {
         if (p.y >= h) { p.y = h; p.vy = -Math.abs(p.vy); }
       }
 
-      // Connections
+      // Connections — use squared distance to skip sqrt
       ctx.lineWidth = 0.5;
       const linkAlpha = isDarkRef.current ? 0.35 : 0.2;
       for (let i = 0; i < pts.length; i++) {
         for (let j = i + 1; j < pts.length; j++) {
-          const dx   = pts[i].x - pts[j].x;
-          const dy   = pts[i].y - pts[j].y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < LINK_DIST) {
-            ctx.globalAlpha = (1 - dist / LINK_DIST) * linkAlpha;
+          const dx  = pts[i].x - pts[j].x;
+          const dy  = pts[i].y - pts[j].y;
+          const dSq = dx * dx + dy * dy;
+          if (dSq < LINK_DIST_SQ) {
+            ctx.globalAlpha = (1 - Math.sqrt(dSq) / LINK_DIST) * linkAlpha;
             ctx.strokeStyle = pts[i].color;
             ctx.beginPath();
             ctx.moveTo(pts[i].x, pts[i].y);
@@ -155,44 +142,43 @@ export default function GlobalBackground() {
         }
       }
 
-      // Dots
+      // Dots — no shadowBlur (expensive per-dot GPU call)
       ctx.globalAlpha = isDarkRef.current ? 0.7 : 0.5;
       for (const p of pts) {
-        ctx.shadowBlur  = 6;
-        ctx.shadowColor = p.color;
-        ctx.fillStyle   = p.color;
+        ctx.fillStyle = p.color;
         ctx.beginPath();
         ctx.arc(p.x, p.y, 1.5, 0, Math.PI * 2);
         ctx.fill();
-        ctx.shadowBlur = 0;
       }
 
-      ctx.globalAlpha  = 1;
-      rafRef.current = requestAnimationFrame(frame);
+      ctx.globalAlpha = 1;
+    }
+
+    function onVisibility() {
+      pausedRef.current = document.hidden;
     }
 
     resize();
     frame();
 
-    window.addEventListener("mousemove", onMouseMove);
-    window.addEventListener("resize",    resize);
+    window.addEventListener("mousemove", onMouseMove, { passive: true });
+    window.addEventListener("resize", resize, { passive: true });
+    document.addEventListener("visibilitychange", onVisibility);
 
     return () => {
       cancelAnimationFrame(rafRef.current);
       window.removeEventListener("mousemove", onMouseMove);
-      window.removeEventListener("resize",    resize);
+      window.removeEventListener("resize", resize);
+      document.removeEventListener("visibilitychange", onVisibility);
     };
   }, []);
 
-  // Re-init particles when isDark changes
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const colors = isDarkRef.current ? DARK_COLORS : LIGHT_COLORS;
     ptsRef.current = initParticles(canvas.width, canvas.height, colors);
   }, [isDark]);
-
-
 
   return (
     <div
@@ -206,7 +192,7 @@ export default function GlobalBackground() {
       <canvas
         ref={canvasRef}
         className="absolute inset-0 w-full h-full"
-        style={{ pointerEvents: "none" }}
+        style={{ pointerEvents: "none", willChange: "transform" }}
       />
     </div>
   );
