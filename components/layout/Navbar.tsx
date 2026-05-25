@@ -129,7 +129,7 @@ export default function Navbar() {
                 }}
               >
                 <span className="font-mono font-bold text-sm text-cyan-400 tracking-wider z-10">
-                  MFH
+                  MDF
                 </span>
 
                 <div
