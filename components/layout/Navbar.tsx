@@ -146,12 +146,12 @@ export default function Navbar() {
               </div>
 
               <div className="hidden sm:flex flex-col leading-none gap-1">
-                <span className={cn("text-[10px] font-mono tracking-[0.22em] uppercase", isDark ? "text-white/35" : "text-slate-400")}>
-                  AI Engineer
-                </span>
-
                 <span className={cn("text-[13px] font-light tracking-[0.12em] uppercase transition-colors duration-300", isDark ? "text-white/75 group-hover:text-white" : "text-slate-600 group-hover:text-slate-900")}>
                   MD F HASNAT
+                </span>
+
+                <span className={cn("text-[10px] font-mono tracking-[0.22em] uppercase", isDark ? "text-white/35" : "text-slate-400")}>
+                  AI Engineer
                 </span>
               </div>
             </motion.button>
