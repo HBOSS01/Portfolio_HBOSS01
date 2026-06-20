@@ -170,12 +170,13 @@ export default function Skills() {
           </span>
 
           <h2 className="mt-5 text-4xl sm:text-5xl font-bold tracking-tight">
-            <span className={isDark ? "text-white" : "text-slate-900"}>My </span>
+            <span className={isDark ? "text-white" : "text-[#050F1E]"}}>My </span>
             <span
               className="text-transparent bg-clip-text"
               style={{
-                backgroundImage:
-                  "linear-gradient(100deg, #22d3ee 0%, #38bdf8 55%, #818cf8 100%)",
+                backgroundImage: isDark
+                  ? "linear-gradient(100deg, #22d3ee 0%, #38bdf8 55%, #818cf8 100%)"
+                  : "linear-gradient(100deg, #0891b2 0%, #0ea5e9 50%, #6366f1 100%)",
               }}
             >
               Skills
@@ -190,7 +191,7 @@ export default function Skills() {
             }}
           />
 
-          <p className={`mt-5 text-[14.5px] max-w-lg leading-relaxed ${isDark ? "text-white/38" : "text-slate-500"}`}>
+          <p className={`mt-5 text-[14.5px] max-w-lg leading-relaxed ${isDark ? "text-white/38" : "text-[#475569]"}`}>
             A curated set of technologies I use to design, build, and ship
             intelligent AI systems — from research to production.
           </p>
@@ -208,7 +209,7 @@ export default function Skills() {
         {/* ── Proficiency legend ──────────────────────────── */}
         <motion.div
           {...scrollFadeUp(0.65)}
-          className="mt-10 flex items-center justify-center gap-6 flex-wrap"
+          className="mt-12 flex items-center justify-center gap-7 flex-wrap"
           aria-label="Proficiency level guide"
         >
           {(
@@ -219,20 +220,22 @@ export default function Skills() {
               { label: "Expert",       pct: 100 },
             ] as const
           ).map(({ label, pct }) => (
-            <div key={label} className="flex items-center gap-2">
+            <div key={label} className="flex items-center gap-2.5">
               <div
-                className="relative h-1 w-10 rounded-full overflow-hidden"
-                style={{ backgroundColor: isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.08)" }}
+                className="relative h-1.5 w-12 rounded-full overflow-hidden"
+                style={{ backgroundColor: isDark ? "rgba(255,255,255,0.06)" : "rgba(15,23,42,0.08)" }}
               >
                 <div
                   className="absolute inset-y-0 left-0 rounded-full"
                   style={{
-                    width:           `${pct}%`,
-                    backgroundColor: "rgba(6,182,212,0.55)",
+                    width:      `${pct}%`,
+                    background: isDark
+                      ? "rgba(6,182,212,0.55)"
+                      : "linear-gradient(90deg, #0891b2, #0ea5e9)",
                   }}
                 />
               </div>
-              <span className={`text-[11px] font-mono tracking-wide ${isDark ? "text-white/28" : "text-slate-500"}`}>
+              <span className={`text-[11px] font-mono tracking-wide ${isDark ? "text-white/28" : "text-[#64748B]"}`}>
                 {label}
               </span>
             </div>
@@ -254,23 +257,26 @@ function CategoryCard({ category }: { category: Category }) {
 
   return (
     <motion.div
-      whileHover={{ y: -5, scale: 1.01 }}
+      whileHover={{ y: -7, scale: 1.015 }}
       transition={{ duration: 0.24, ease: "easeOut" }}
       className="relative h-full p-6 rounded-2xl border overflow-hidden cursor-default"
       style={{
-        backgroundColor:  isDark ? "rgba(255,255,255,0.02)" : "rgba(255,255,255,0.75)",
-        borderColor:       accent(0.14),
-        backdropFilter:   "blur(16px)",
+        backgroundColor:      isDark ? "rgba(255,255,255,0.02)" : "rgba(255,255,255,0.95)",
+        borderColor:           isDark ? accent(0.14) : accent(0.22),
+        backdropFilter:       "blur(16px)",
         WebkitBackdropFilter: "blur(16px)",
+        boxShadow:             isDark
+          ? "none"
+          : `0 1px 0 ${accent(0.18)}, 0 10px 40px rgba(15,23,42,0.09)`,
       }}
     >
       {/* Corner ambient glow */}
       <div
         className="absolute top-0 right-0 pointer-events-none"
         style={{
-          width:     "160px",
-          height:    "160px",
-          background: `radial-gradient(circle, ${accent(0.18)} 0%, transparent 70%)`,
+          width:     "180px",
+          height:    "180px",
+          background: `radial-gradient(circle, ${accent(isDark ? 0.18 : 0.22)} 0%, transparent 70%)`,
           filter:    "blur(28px)",
           transform: "translate(40%, -40%)",
         }}
@@ -279,21 +285,24 @@ function CategoryCard({ category }: { category: Category }) {
       <div className="relative flex flex-col gap-5">
 
         {/* Header */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3.5">
           <div
-            className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0"
-            style={{ backgroundColor: accent(0.12) }}
+            className="w-11 h-11 rounded-xl flex items-center justify-center shrink-0"
+            style={{
+              backgroundColor: isDark ? accent(0.12) : accent(0.10),
+              border:          isDark ? "none" : `1.5px solid ${accent(0.25)}`,
+            }}
           >
             <Icon
-              className="w-4 h-4"
-              style={{ color: accent(1) }}
+              className="w-5 h-5"
+              style={{ color: isDark ? accent(1) : accent(0.9) }}
             />
           </div>
           <div className="min-w-0">
-            <h3 className={`text-[13.5px] font-semibold leading-snug truncate ${isDark ? "text-white/75" : "text-slate-700"}`}>
+            <h3 className={`text-[14px] font-bold leading-snug truncate ${isDark ? "text-white/75" : "text-[#0F172A]"}`}>
               {category.title}
             </h3>
-            <p className={`text-[10.5px] font-mono mt-0.5 ${isDark ? "text-white/28" : "text-slate-500"}`}>
+            <p className={`text-[10.5px] font-mono mt-0.5 ${isDark ? "text-white/28" : "text-[#64748B]"}`}>
               {category.skills.length} technologies
             </p>
           </div>
@@ -303,7 +312,9 @@ function CategoryCard({ category }: { category: Category }) {
         <div
           className="h-px w-full"
           style={{
-            background: `linear-gradient(90deg, ${accent(0.3)}, transparent)`,
+            background: isDark
+              ? `linear-gradient(90deg, ${accent(0.3)}, transparent)`
+              : `linear-gradient(90deg, ${accent(0.5)}, transparent)`,
           }}
         />
 
@@ -333,23 +344,31 @@ function SkillRow({
 }) {
   const isDark = useIsDark();
   return (
-    <li className="group flex flex-col gap-1.5">
+    <li className="group flex flex-col gap-2">
       <div className="flex items-center justify-between gap-2">
-        <span className={`text-[12.5px] leading-none ${isDark ? "text-white/55" : "text-slate-600"}`}>
+        <span className={`text-[13px] font-medium leading-none ${isDark ? "text-white/55" : "text-[#1E293B]"}`}>
           {skill.name}
         </span>
         <span
-          className={`text-[9.5px] font-mono tracking-wider uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-200 shrink-0 ${isDark ? "text-white/20" : "text-slate-400"}`}
+          className={`text-[9.5px] font-mono tracking-wider uppercase shrink-0 transition-opacity duration-200 ${
+            isDark
+              ? "text-white/20 opacity-0 group-hover:opacity-100"
+              : "text-[#64748B] opacity-60 group-hover:opacity-100"
+          }`}
           aria-label={`Proficiency: ${skill.level}`}
         >
           {skill.level}
         </span>
       </div>
 
-      {/* Animated progress bar */}
+      {/* Animated progress bar — 3px tall, gradient fill */}
       <div
-        className="relative h-px w-full rounded-full overflow-hidden"
-        style={{ backgroundColor: isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.07)" }}
+        className="relative h-[3px] w-full rounded-full overflow-hidden"
+        style={{
+          backgroundColor: isDark
+            ? "rgba(255,255,255,0.06)"
+            : "rgba(15,23,42,0.07)",
+        }}
         role="meter"
         aria-valuenow={LEVEL_PCT[skill.level]}
         aria-valuemin={0}
@@ -363,8 +382,10 @@ function SkillRow({
           viewport={{ once: true, margin: "-40px" }}
           transition={{ duration: 1, delay: 0.15, ease: EASE_OUT }}
           style={{
-            backgroundColor: accent(0.75),
-            boxShadow:       `0 0 6px 1px ${accent(0.5)}`,
+            background:  isDark
+              ? accent(0.75)
+              : `linear-gradient(90deg, ${accent(0.9)}, ${accent(0.65)})`,
+            boxShadow:  isDark ? `0 0 6px 1px ${accent(0.5)}` : `0 0 8px 1px ${accent(0.4)}`,
           }}
         />
       </div>
