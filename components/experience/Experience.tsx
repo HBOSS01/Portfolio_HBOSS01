@@ -140,12 +140,13 @@ export default function Experience() {
           </span>
 
           <h2 className="mt-5 text-4xl sm:text-5xl font-bold tracking-tight">
-            <span className={isDark ? "text-white" : "text-slate-900"}>My </span>
+            <span className={isDark ? "text-white" : "text-[#050F1E]"}>My </span>
             <span
               className="text-transparent bg-clip-text"
               style={{
-                backgroundImage:
-                  "linear-gradient(100deg, #22d3ee 0%, #38bdf8 55%, #818cf8 100%)",
+                backgroundImage: isDark
+                  ? "linear-gradient(100deg, #22d3ee 0%, #38bdf8 55%, #818cf8 100%)"
+                  : "linear-gradient(100deg, #0891b2 0%, #0ea5e9 50%, #6366f1 100%)",
               }}
             >
               Experience
@@ -160,7 +161,7 @@ export default function Experience() {
             }}
           />
 
-          <p className={`mt-5 text-[14.5px] max-w-lg leading-relaxed ${isDark ? "text-white/38" : "text-slate-500"}`}>
+          <p className={`mt-5 text-[14.5px] max-w-lg leading-relaxed ${isDark ? "text-white/38" : "text-[#475569]"}`}>
             A timeline of research milestones, engineering projects, and
             continuous learning — from foundations to the frontier.
           </p>
@@ -173,8 +174,10 @@ export default function Experience() {
           <div
             className="absolute top-5 bottom-5 w-px left-5 sm:left-6 pointer-events-none"
             style={{
-              background:
-                "linear-gradient(to bottom, transparent, rgba(6,182,212,0.35) 8%, rgba(6,182,212,0.18) 85%, transparent 100%)",
+              background: isDark
+                ? "linear-gradient(to bottom, transparent, rgba(6,182,212,0.35) 8%, rgba(6,182,212,0.18) 85%, transparent 100%)"
+                : "linear-gradient(to bottom, transparent, rgba(8,145,178,0.55) 8%, rgba(8,145,178,0.30) 85%, transparent 100%)",
+              boxShadow: isDark ? "none" : "0 0 6px rgba(8,145,178,0.18)",
             }}
           />
 
@@ -206,18 +209,20 @@ function TimelineItem({ entry }: { entry: TimelineEntry }) {
       {/* Node */}
       <div className="flex-shrink-0">
         <motion.div
-          whileHover={{ scale: 1.1 }}
+          whileHover={{ scale: 1.15 }}
           transition={{ duration: 0.2, ease: "easeOut" }}
           className="relative w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center"
           style={{
-            backgroundColor: accent(0.08),
-            border:          `1.5px solid ${accent(0.35)}`,
-            boxShadow:       `0 0 20px ${accent(0.22)}, 0 0 40px ${accent(0.08)}`,
+            backgroundColor: isDark ? accent(0.08) : accent(0.10),
+            border:          isDark ? `1.5px solid ${accent(0.35)}` : `2px solid ${accent(0.55)}`,
+            boxShadow:       isDark
+              ? `0 0 20px ${accent(0.22)}, 0 0 40px ${accent(0.08)}`
+              : `0 0 0 4px ${accent(0.10)}, 0 0 20px ${accent(0.30)}, 0 4px 12px ${accent(0.18)}`,
           }}
         >
           <Icon
             className="w-4 h-4 sm:w-5 sm:h-5"
-            style={{ color: accent(1) }}
+            style={{ color: isDark ? accent(1) : accent(0.95) }}
           />
 
           {/* Pulse ring */}
@@ -229,14 +234,14 @@ function TimelineItem({ entry }: { entry: TimelineEntry }) {
               repeat:   Infinity,
               ease:     "easeInOut",
             }}
-            style={{ border: `1px solid ${accent(0.55)}` }}
+            style={{ border: `1px solid ${accent(isDark ? 0.55 : 0.45)}` }}
           />
         </motion.div>
       </div>
 
       {/* Card */}
       <motion.div
-        whileHover={{ y: -3 }}
+        whileHover={{ y: -5, x: 2 }}
         transition={{ duration: 0.22, ease: "easeOut" }}
         className="flex-1 min-w-0"
       >
@@ -258,21 +263,25 @@ function EntryCard({
   const isDark = useIsDark();
   return (
     <div
-      className="relative p-5 sm:p-6 rounded-2xl border overflow-hidden"
+      className="relative p-6 sm:p-7 rounded-2xl border overflow-hidden"
       style={{
-        backgroundColor:      isDark ? "rgba(255,255,255,0.02)" : "rgba(255,255,255,0.75)",
-        borderColor:           accent(0.15),
+        backgroundColor:      isDark ? "rgba(255,255,255,0.02)" : "rgba(255,255,255,0.95)",
+        borderColor:           isDark ? accent(0.15) : accent(0.22),
         backdropFilter:       "blur(16px)",
         WebkitBackdropFilter: "blur(16px)",
+        boxShadow:             isDark
+          ? "none"
+          : `0 1px 0 ${accent(0.18)}, 0 10px 40px rgba(15,23,42,0.08), 0 2px 8px rgba(15,23,42,0.04)`,
+        transition:            "box-shadow 0.25s ease, border-color 0.25s ease",
       }}
     >
       {/* Corner glow */}
       <div
         className="absolute top-0 right-0 pointer-events-none"
         style={{
-          width:     "200px",
-          height:    "200px",
-          background: `radial-gradient(circle, ${accent(0.09)} 0%, transparent 70%)`,
+          width:     "220px",
+          height:    "220px",
+          background: `radial-gradient(circle, ${accent(isDark ? 0.09 : 0.14)} 0%, transparent 70%)`,
           filter:    "blur(28px)",
           transform: "translate(40%, -40%)",
         }}
@@ -282,16 +291,17 @@ function EntryCard({
 
         {/* Header */}
         <div className="flex items-start justify-between gap-4 flex-wrap">
-          <h3 className={`text-[15px] sm:text-[15.5px] font-semibold leading-snug ${isDark ? "text-white/80" : "text-slate-800"}`}>
+          <h3 className={`text-[15.5px] sm:text-[16px] font-bold leading-snug ${isDark ? "text-white/80" : "text-[#0F172A]"}`}>
             {entry.title}
           </h3>
 
           <span
-            className="flex-shrink-0 px-2.5 py-1 rounded-md text-[10px] font-mono tracking-widest whitespace-nowrap"
+            className="flex-shrink-0 px-3 py-1 rounded-lg text-[10px] font-mono tracking-widest whitespace-nowrap font-semibold"
             style={{
-              backgroundColor: accent(0.08),
-              color:           accent(0.9),
-              border:          `1px solid ${accent(0.22)}`,
+              backgroundColor: isDark ? accent(0.08) : accent(0.10),
+              color:           isDark ? accent(0.9) : accent(0.95),
+              border:          `1px solid ${isDark ? accent(0.22) : accent(0.35)}`,
+              boxShadow:       isDark ? "none" : `0 2px 8px ${accent(0.15)}`,
             }}
           >
             {entry.period}
@@ -302,12 +312,14 @@ function EntryCard({
         <div
           className="h-px w-full"
           style={{
-            background: `linear-gradient(90deg, ${accent(0.28)}, transparent)`,
+            background: isDark
+              ? `linear-gradient(90deg, ${accent(0.28)}, transparent)`
+              : `linear-gradient(90deg, ${accent(0.45)}, transparent)`,
           }}
         />
 
         {/* Description */}
-        <p className={`text-[13px] leading-relaxed ${isDark ? "text-white/40" : "text-slate-500"}`}>
+        <p className={`text-[13.5px] leading-relaxed ${isDark ? "text-white/40" : "text-[#475569]"}`}>
           {entry.description}
         </p>
 
@@ -316,10 +328,10 @@ function EntryCard({
           {entry.tech.map((t) => (
             <span
               key={t}
-              className={`px-2 py-0.5 text-[10px] font-mono rounded border ${isDark ? "text-white/35" : "text-slate-500"}`}
+              className={`px-2.5 py-1 text-[10.5px] font-mono rounded-md border ${isDark ? "text-white/35" : "text-[#334155]"}`}
               style={{
-                backgroundColor: isDark ? "rgba(255,255,255,0.025)" : "rgba(0,0,0,0.04)",
-                borderColor:     isDark ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.08)",
+                backgroundColor: isDark ? "rgba(255,255,255,0.025)" : "rgba(255,255,255,0.85)",
+                borderColor:     isDark ? "rgba(255,255,255,0.07)" : "rgba(100,116,139,0.22)",
               }}
             >
               {t}
