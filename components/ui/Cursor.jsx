@@ -45,9 +45,9 @@ export default function Cursor() {
     // Hide native cursor
     document.body.style.cursor = "none";
 
-    // Hover effect: expand big circle, hide small dot
+    // Hover effect: expand big circle to original big size, hide small dot
     const handleMouseEnterLink = () => {
-      gsap.to(bigCircle,   { scale: 1.6, opacity: 0.6, duration: 0.3 });
+      gsap.to(bigCircle,   { scale: 1.5, opacity: 0.6, duration: 0.3 });
       gsap.to(smallCircle, { scale: 0,   opacity: 0,   duration: 0.3 });
     };
     const handleMouseLeaveLink = () => {
@@ -81,8 +81,8 @@ export default function Cursor() {
           position:        "fixed",
           top:             0,
           left:            0,
-          width:           "44px",
-          height:          "44px",
+          width:           "30px",
+          height:          "30px",
           borderRadius:    "50%",
           background:      "rgba(59, 130, 246, 0.12)",
           border:          "2px solid rgba(59, 130, 246, 0.75)",
