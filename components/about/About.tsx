@@ -107,12 +107,13 @@ export default function About() {
           </span>
 
           <h2 className="mt-5 text-4xl sm:text-5xl font-bold tracking-tight">
-            <span className={isDark ? "text-white" : "text-slate-900"}>About </span>
+            <span className={isDark ? "text-white" : "text-[#050F1E]"}}>About </span>
             <span
               className="text-transparent bg-clip-text"
               style={{
-                backgroundImage:
-                  "linear-gradient(100deg, #22d3ee 0%, #38bdf8 55%, #818cf8 100%)",
+                backgroundImage: isDark
+                  ? "linear-gradient(100deg, #22d3ee 0%, #38bdf8 55%, #818cf8 100%)"
+                  : "linear-gradient(100deg, #0891b2 0%, #0ea5e9 50%, #6366f1 100%)",
               }}
             >
               Me
@@ -136,26 +137,26 @@ export default function About() {
 
             {/* Bio paragraphs */}
             <motion.div {...scrollFadeUp(0.1)} className="flex flex-col gap-4">
-              <p className={`text-[15px] leading-[1.9] ${isDark ? "text-white/50" : "text-[#475569]"}`}>
+              <p className={`text-[15.5px] leading-[1.9] ${isDark ? "text-white/50" : "text-[#475569]"}`}>
                 I&apos;m{" "}
-                <span className={`font-medium ${isDark ? "text-white/80" : "text-[#0F172A]"}`}>
+                <span className={`font-semibold ${isDark ? "text-white/80" : "text-[#0F172A]"}`}>
                   Md Fatin Hasnat Patwary
                 </span>
                 , an AI Engineer and Researcher driven by a deep passion for
                 building intelligent systems that make a tangible difference.
                 My expertise spans{" "}
-                <span className={isDark ? "text-white/70" : "text-slate-600"}>machine learning</span>,{" "}
-                <span className={isDark ? "text-white/70" : "text-slate-600"}>
+                <span className={`font-semibold ${isDark ? "text-white/70" : "text-cyan-700"}`}>machine learning</span>,{" "}
+                <span className={`font-semibold ${isDark ? "text-white/70" : "text-cyan-700"}`}>
                   natural language processing
                 </span>
                 , and{" "}
-                <span className={isDark ? "text-white/70" : "text-slate-600"}>computer vision</span> —
+                <span className={`font-semibold ${isDark ? "text-white/70" : "text-cyan-700"}`}>computer vision</span> —
                 bridging cutting-edge research with real-world engineering.
               </p>
               <p className={`text-[15px] leading-[1.9] ${isDark ? "text-white/40" : "text-[#64748B]"}`}>
                 I thrive at the intersection of innovation and precision —
-                whether fine-tuning large language models, designing RAG
-                pipelines, or training end-to-end computer vision
+                whether fine-tuning large language models, designing
+                RAG pipelines, or training end-to-end computer vision
                 architectures. Every problem I approach is an opportunity to
                 push the frontier of what AI can achieve.
               </p>
@@ -164,23 +165,27 @@ export default function About() {
             {/* "What drives me" callout */}
             <motion.div
               {...scrollFadeUp(0.18)}
-              className="flex items-start gap-3.5 p-4 rounded-xl border"
+              className="flex items-start gap-4 p-5 rounded-2xl border"
               style={{
-                backgroundColor: "rgba(6,182,212,0.04)",
-                borderColor: "rgba(6,182,212,0.12)",
+                backgroundColor: isDark ? "rgba(6,182,212,0.04)" : "rgba(8,145,178,0.05)",
+                borderColor: isDark ? "rgba(6,182,212,0.12)" : "rgba(8,145,178,0.22)",
+                boxShadow: isDark ? "none" : "0 4px 20px rgba(8,145,178,0.08)",
               }}
             >
               <div
-                className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0 mt-0.5"
-                style={{ backgroundColor: "rgba(6,182,212,0.1)" }}
+                className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 mt-0.5"
+                style={{
+                  backgroundColor: isDark ? "rgba(6,182,212,0.1)" : "rgba(8,145,178,0.12)",
+                  border: isDark ? "none" : "1px solid rgba(8,145,178,0.20)",
+                }}
               >
-                <Zap className="w-4 h-4 text-cyan-400" />
+                <Zap className={`w-5 h-5 ${isDark ? "text-cyan-400" : "text-cyan-600"}`} />
               </div>
               <div>
-                <p className={`text-[13px] font-semibold mb-1 ${isDark ? "text-white/65" : "text-[#334155]"}`}>
+                <p className={`text-[13.5px] font-semibold mb-1.5 ${isDark ? "text-white/65" : "text-[#0F172A]"}`}>
                   What drives me
                 </p>
-                <p className={`text-[13px] leading-relaxed ${isDark ? "text-white/38" : "text-[#64748B]"}`}>
+                <p className={`text-[13.5px] leading-relaxed ${isDark ? "text-white/38" : "text-[#475569]"}`}>
                   Building AI that doesn&apos;t just perform — but understands,
                   adapts, and empowers. Research-first thinking, production-grade
                   execution.
@@ -222,37 +227,43 @@ function StatCard({
   const isDark = useIsDark();
   return (
     <motion.div
-      whileHover={{ y: -3, scale: 1.015 }}
+      whileHover={{ y: -4, scale: 1.02 }}
       transition={{ duration: 0.22, ease: "easeOut" }}
-      className="p-5 rounded-2xl border flex flex-col gap-3 h-full cursor-default select-none"
+      className="p-6 rounded-2xl border flex flex-col gap-4 h-full cursor-default select-none"
       style={{
-        backgroundColor: isDark ? "rgba(6,182,212,0.04)" : "rgba(255,255,255,0.88)",
-        borderColor: isDark ? "rgba(6,182,212,0.1)" : "rgba(0,180,255,0.14)",
+        backgroundColor: isDark ? "rgba(6,182,212,0.04)" : "rgba(255,255,255,0.95)",
+        borderColor: isDark ? "rgba(6,182,212,0.1)" : "rgba(8,145,178,0.18)",
         backdropFilter: "blur(12px)",
         WebkitBackdropFilter: "blur(12px)",
-        boxShadow: isDark ? "none" : "0 8px 28px rgba(15,23,42,0.07)",
+        boxShadow: isDark
+          ? "none"
+          : "0 2px 0px rgba(8,145,178,0.12), 0 8px 32px rgba(15,23,42,0.08)",
       }}
     >
-      <div className="flex items-center gap-3">
-        <div
-          className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0"
-          style={{ backgroundColor: "rgba(6,182,212,0.1)" }}
-        >
-          <Icon className="w-4 h-4 text-cyan-400" />
-        </div>
+      <div
+        className="w-11 h-11 rounded-xl flex items-center justify-center shrink-0"
+        style={{
+          backgroundColor: isDark ? "rgba(6,182,212,0.1)" : "rgba(8,145,178,0.10)",
+          border: isDark ? "none" : "1px solid rgba(8,145,178,0.18)",
+        }}
+      >
+        <Icon className={`w-5 h-5 ${isDark ? "text-cyan-400" : "text-cyan-600"}`} />
+      </div>
+      <div className="flex flex-col gap-1">
         <span
-          className="text-2xl font-bold tracking-tight text-transparent bg-clip-text leading-none"
+          className="text-3xl font-black tracking-tight text-transparent bg-clip-text leading-none"
           style={{
-            backgroundImage:
-              "linear-gradient(135deg, #22d3ee 0%, #38bdf8 100%)",
+            backgroundImage: isDark
+              ? "linear-gradient(135deg, #22d3ee 0%, #38bdf8 100%)"
+              : "linear-gradient(135deg, #0891b2 0%, #0ea5e9 100%)",
           }}
         >
           {value}
         </span>
+        <span className={`text-[12px] font-medium tracking-wide leading-snug ${isDark ? "text-white/40" : "text-[#475569]"}`}>
+          {label}
+        </span>
       </div>
-      <span className={`text-[11.5px] tracking-wide leading-snug ${isDark ? "text-white/40" : "text-[#64748B]"}`}>
-        {label}
-      </span>
     </motion.div>
   );
 }
@@ -263,13 +274,15 @@ function GlassCard() {
   const isDark = useIsDark();
   return (
     <div
-      className="relative p-7 sm:p-8 rounded-3xl border overflow-hidden"
+      className="relative p-8 sm:p-9 rounded-3xl border overflow-hidden"
       style={{
-        backgroundColor: isDark ? "rgba(6,182,212,0.025)" : "rgba(255,255,255,0.88)",
-        borderColor: isDark ? "rgba(6,182,212,0.1)" : "rgba(0,180,255,0.13)",
+        backgroundColor: isDark ? "rgba(6,182,212,0.025)" : "rgba(255,255,255,0.97)",
+        borderColor: isDark ? "rgba(6,182,212,0.1)" : "rgba(8,145,178,0.20)",
         backdropFilter: "blur(24px)",
         WebkitBackdropFilter: "blur(24px)",
-        boxShadow: isDark ? "none" : "0 10px 35px rgba(15,23,42,0.07)",
+        boxShadow: isDark
+          ? "none"
+          : "0 1px 0 rgba(8,145,178,0.15), 0 12px 48px rgba(15,23,42,0.09), 0 2px 8px rgba(15,23,42,0.05)",
       }}
     >
       {/* Corner glows */}
@@ -296,9 +309,9 @@ function GlassCard() {
 
         {/* Research areas */}
         <section aria-label="Research areas">
-          <div className="flex items-center gap-2 mb-4">
-            <Sparkles className="w-4 h-4 text-cyan-400 shrink-0" />
-            <h3 className={`text-[12px] font-semibold tracking-[0.12em] uppercase ${isDark ? "text-white/55" : "text-[#475569]"}`}>
+          <div className="flex items-center gap-2 mb-5">
+            <Sparkles className={`w-4 h-4 shrink-0 ${isDark ? "text-cyan-400" : "text-cyan-600"}`} />
+            <h3 className={`text-[11px] font-bold tracking-[0.16em] uppercase ${isDark ? "text-white/55" : "text-[#334155]"}`}>
               Research Areas
             </h3>
           </div>
@@ -308,10 +321,10 @@ function GlassCard() {
                 key={area}
                 whileHover={{ scale: 1.04 }}
                 transition={{ duration: 0.18 }}
-                className="px-3 py-1.5 text-[12px] font-medium text-cyan-400 rounded-lg border cursor-default select-none"
+                className={`px-3.5 py-1.5 text-[12px] font-semibold rounded-lg border cursor-default select-none ${isDark ? "text-cyan-400" : "text-cyan-700"}`}
                 style={{
-                  backgroundColor: "rgba(6,182,212,0.07)",
-                  borderColor: "rgba(6,182,212,0.18)",
+                  backgroundColor: isDark ? "rgba(6,182,212,0.07)" : "rgba(8,145,178,0.08)",
+                  borderColor: isDark ? "rgba(6,182,212,0.18)" : "rgba(8,145,178,0.28)",
                 }}
               >
                 {area}
@@ -324,28 +337,37 @@ function GlassCard() {
         <div
           className="h-px w-full"
           style={{
-            background:
-              "linear-gradient(90deg, transparent, rgba(6,182,212,0.15), transparent)",
+            background: isDark
+              ? "linear-gradient(90deg, transparent, rgba(6,182,212,0.15), transparent)"
+              : "linear-gradient(90deg, transparent, rgba(8,145,178,0.28), transparent)",
           }}
         />
 
         {/* Stack highlights */}
         <section aria-label="Stack highlights">
-          <div className="flex items-center gap-2 mb-4">
-            <Cpu className="w-4 h-4 text-cyan-400 shrink-0" />
-            <h3 className={`text-[12px] font-semibold tracking-[0.12em] uppercase ${isDark ? "text-white/55" : "text-slate-600"}`}>
+          <div className="flex items-center gap-2 mb-5">
+            <Cpu className={`w-4 h-4 shrink-0 ${isDark ? "text-cyan-400" : "text-cyan-600"}`} />
+            <h3 className={`text-[11px] font-bold tracking-[0.16em] uppercase ${isDark ? "text-white/55" : "text-[#334155]"}`}>
               Stack Highlights
             </h3>
           </div>
-          <ul className="flex flex-col gap-3.5">
+          <ul className="flex flex-col gap-4">
             {HIGHLIGHTS.map((h) => (
-              <li key={h.label} className="flex items-start gap-2.5">
-                <ChevronRight className="w-3.5 h-3.5 text-cyan-400 mt-0.5 shrink-0" />
+              <li key={h.label} className="flex items-start gap-3">
+                <div
+                  className="w-5 h-5 rounded-md flex items-center justify-center shrink-0 mt-0.5"
+                  style={{
+                    backgroundColor: isDark ? "rgba(6,182,212,0.1)" : "rgba(8,145,178,0.10)",
+                    border: isDark ? "none" : "1px solid rgba(8,145,178,0.18)",
+                  }}
+                >
+                  <ChevronRight className={`w-3 h-3 shrink-0 ${isDark ? "text-cyan-400" : "text-cyan-600"}`} />
+                </div>
                 <div>
-                  <p className={`text-[10.5px] tracking-[0.15em] uppercase font-mono mb-0.5 ${isDark ? "text-white/30" : "text-[#64748B]"}`}>
+                  <p className={`text-[10.5px] tracking-[0.15em] uppercase font-mono mb-1 ${isDark ? "text-white/30" : "text-[#64748B]"}`}>
                     {h.label}
                   </p>
-                  <p className={`text-[13.5px] leading-snug ${isDark ? "text-white/60" : "text-[#334155]"}`}>
+                  <p className={`text-[14px] font-medium leading-snug ${isDark ? "text-white/60" : "text-[#0F172A]"}`}>
                     {h.value}
                   </p>
                 </div>
@@ -380,9 +402,9 @@ function GlassCard() {
               Currently
             </span>
           </span>
-          <p className={`text-[13px] leading-snug ${isDark ? "text-white/40" : "text-slate-500"}`}>
+          <p className={`text-[13.5px] leading-snug ${isDark ? "text-white/40" : "text-[#475569]"}`}>
             Researching{" "}
-            <span className={isDark ? "text-white/60" : "text-slate-600"}>multimodal AI</span> and building
+            <span className={`font-semibold ${isDark ? "text-white/60" : "text-cyan-700"}`}>multimodal AI</span> and building
             production LLM systems
           </p>
         </div>
