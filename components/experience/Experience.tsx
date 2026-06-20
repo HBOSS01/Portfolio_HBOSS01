@@ -200,6 +200,7 @@ export default function Experience() {
 /* ─── Timeline item ──────────────────────────────────────── */
 
 function TimelineItem({ entry }: { entry: TimelineEntry }) {
+  const isDark = useIsDark();
   const Icon   = entry.icon;
   const accent = (a: number) => `rgba(${entry.accentRgb.join(",")},${a})`;
 
