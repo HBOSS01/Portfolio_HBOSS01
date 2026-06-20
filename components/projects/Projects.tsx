@@ -152,7 +152,7 @@ export default function Projects() {
           </span>
 
           <h2 className="mt-5 text-4xl sm:text-5xl font-bold tracking-tight">
-            <span className={isDark ? "text-white" : "text-[#050F1E]"}}>Featured </span>
+            <span className={isDark ? "text-white" : "text-[#050F1E]"}>Featured </span>
             <span
               className="text-transparent bg-clip-text"
               style={{
