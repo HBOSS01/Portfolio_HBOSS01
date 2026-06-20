@@ -152,12 +152,13 @@ export default function Projects() {
           </span>
 
           <h2 className="mt-5 text-4xl sm:text-5xl font-bold tracking-tight">
-            <span className={isDark ? "text-white" : "text-slate-900"}>Featured </span>
+            <span className={isDark ? "text-white" : "text-[#050F1E]"}}>Featured </span>
             <span
               className="text-transparent bg-clip-text"
               style={{
-                backgroundImage:
-                  "linear-gradient(100deg, #22d3ee 0%, #38bdf8 55%, #818cf8 100%)",
+                backgroundImage: isDark
+                  ? "linear-gradient(100deg, #22d3ee 0%, #38bdf8 55%, #818cf8 100%)"
+                  : "linear-gradient(100deg, #0891b2 0%, #0ea5e9 50%, #6366f1 100%)",
               }}
             >
               Projects
@@ -208,10 +209,13 @@ function FeaturedCard({ project }: { project: Project }) {
       transition={{ duration: 0.24, ease: "easeOut" }}
       className="relative rounded-2xl border overflow-hidden"
       style={{
-        backgroundColor:      isDark ? "rgba(255,255,255,0.02)" : "rgba(255,255,255,0.8)",
-        borderColor:           accent(0.2),
+        backgroundColor:      isDark ? "rgba(255,255,255,0.02)" : "rgba(255,255,255,0.97)",
+        borderColor:           accent(isDark ? 0.2 : 0.28),
         backdropFilter:       "blur(16px)",
         WebkitBackdropFilter: "blur(16px)",
+        boxShadow:             isDark
+          ? "none"
+          : `0 1px 0 ${accent(0.20)}, 0 16px 56px rgba(15,23,42,0.10)`,
       }}
     >
       <div className="grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr]">
@@ -249,11 +253,11 @@ function FeaturedCard({ project }: { project: Project }) {
               </span>
             </div>
 
-            <h3 className={`text-2xl sm:text-3xl font-bold leading-tight ${isDark ? "text-white" : "text-slate-900"}`}>
+            <h3 className={`text-2xl sm:text-3xl font-black leading-tight tracking-tight ${isDark ? "text-white" : "text-[#050F1E]"}`}>
               {project.title}
             </h3>
 
-            <p className={`text-[14px] leading-relaxed ${isDark ? "text-white/45" : "text-slate-500"}`}>
+            <p className={`text-[14.5px] leading-relaxed ${isDark ? "text-white/45" : "text-[#475569]"}`}>
               {project.description}
             </p>
           </div>
@@ -263,10 +267,11 @@ function FeaturedCard({ project }: { project: Project }) {
             {project.tech.map((t) => (
               <span
                 key={t}
-                className={`px-2.5 py-1 text-[11px] font-mono rounded-md border ${isDark ? "text-white/40" : "text-slate-500"}`}
+                className={`px-2.5 py-1 text-[11px] font-mono rounded-md border ${isDark ? "text-white/40" : "text-[#334155] font-medium"}`}
                 style={{
-                  backgroundColor: isDark ? "rgba(255,255,255,0.03)" : "rgba(0,0,0,0.04)",
-                  borderColor:     isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.09)",
+                  backgroundColor: isDark ? "rgba(255,255,255,0.03)" : "rgba(255,255,255,0.80)",
+                  borderColor:     isDark ? "rgba(255,255,255,0.08)" : "rgba(100,116,139,0.25)",
+                  boxShadow:       isDark ? "none" : "0 1px 3px rgba(15,23,42,0.05)",
                 }}
               >
                 {t}
@@ -312,24 +317,22 @@ function ProjectVisual({
   return (
     <div
       className="relative w-full h-full min-h-[340px] flex items-center justify-center"
-      style={{ backgroundColor: isDark ? "rgba(2,12,24,0.9)" : "rgba(235,242,250,0.9)" }}
+      style={{
+        backgroundColor: isDark ? "rgba(2,12,24,0.9)" : "rgba(241,247,253,0.97)",
+        backgroundImage: isDark
+          ? "radial-gradient(rgba(255,255,255,0.055) 1px, transparent 1px)"
+          : "radial-gradient(rgba(8,145,178,0.10) 1px, transparent 1px)",
+        backgroundSize: "24px 24px",
+      }}
     >
-      {/* Dot grid */}
-      <div
-        className="absolute inset-0"
-        style={{
-          backgroundImage: isDark
-            ? "radial-gradient(rgba(255,255,255,0.055) 1px, transparent 1px)"
-            : "radial-gradient(rgba(0,0,0,0.06) 1px, transparent 1px)",
-          backgroundSize: "24px 24px",
-        }}
-      />
 
-      {/* Central radial glow */}
+      {/* Central radial glow — stronger in light mode */}
       <div
         className="absolute inset-0"
         style={{
-          background: `radial-gradient(circle 200px at 50% 50%, ${accent(0.13)}, transparent)`,
+          background: isDark
+            ? `radial-gradient(circle 200px at 50% 50%, ${accent(0.13)}, transparent)`
+            : `radial-gradient(circle 240px at 50% 50%, ${accent(0.22)}, transparent)`,
         }}
       />
 
@@ -396,14 +399,18 @@ function ProjectCard({ project }: { project: Project }) {
 
   return (
     <motion.div
-      whileHover={{ y: -5, scale: 1.01 }}
+      whileHover={{ y: -7, scale: 1.012 }}
       transition={{ duration: 0.24, ease: "easeOut" }}
       className="relative h-full flex flex-col rounded-2xl border overflow-hidden cursor-default"
       style={{
-        backgroundColor:      isDark ? "rgba(255,255,255,0.02)" : "rgba(255,255,255,0.8)",
-        borderColor:           accent(0.14),
+        backgroundColor:      isDark ? "rgba(255,255,255,0.02)" : "rgba(255,255,255,0.95)",
+        borderColor:           isDark ? accent(0.14) : accent(0.22),
         backdropFilter:       "blur(16px)",
         WebkitBackdropFilter: "blur(16px)",
+        boxShadow:             isDark
+          ? "none"
+          : `0 1px 0 ${accent(0.18)}, 0 10px 40px rgba(15,23,42,0.09)`,
+        transition:            "box-shadow 0.24s ease, border-color 0.24s ease",
       }}
     >
       {/* Card header / image area */}
@@ -411,9 +418,9 @@ function ProjectCard({ project }: { project: Project }) {
         className="relative h-[138px] overflow-hidden flex items-center justify-center"
         style={{
           background:   isDark
-            ? `linear-gradient(140deg, rgba(2,12,24,0.95) 0%, ${accent(0.09)} 55%, rgba(2,12,24,0.95) 100%)`
-            : `linear-gradient(140deg, rgba(235,242,250,0.95) 0%, ${accent(0.09)} 55%, rgba(235,242,250,0.95) 100%)`,
-          borderBottom: `1px solid ${accent(0.1)}`,
+          ? `linear-gradient(140deg, rgba(2,12,24,0.95) 0%, ${accent(0.09)} 55%, rgba(2,12,24,0.95) 100%)`
+          : `linear-gradient(140deg, rgba(241,247,253,0.98) 0%, ${accent(0.13)} 55%, rgba(241,247,253,0.98) 100%)`,
+        borderBottom: `1px solid ${isDark ? accent(0.10) : accent(0.20)}`,
         }}
       >
         {/* Dot grid */}
@@ -466,11 +473,11 @@ function ProjectCard({ project }: { project: Project }) {
 
       {/* Content */}
       <div className="flex flex-col gap-4 p-6 flex-1">
-        <div className="flex flex-col gap-2">
-          <h3 className={`text-[15px] font-semibold leading-snug ${isDark ? "text-white/80" : "text-slate-800"}`}>
+        <div className="flex flex-col gap-2.5">
+          <h3 className={`text-[16px] font-bold leading-snug ${isDark ? "text-white/80" : "text-[#050F1E]"}`}>
             {project.title}
           </h3>
-          <p className={`text-[12.5px] leading-relaxed line-clamp-3 ${isDark ? "text-white/38" : "text-slate-500"}`}>
+          <p className={`text-[12.5px] leading-relaxed line-clamp-3 ${isDark ? "text-white/38" : "text-[#475569]"}`}>
             {project.description}
           </p>
         </div>
@@ -480,10 +487,10 @@ function ProjectCard({ project }: { project: Project }) {
           {project.tech.slice(0, 4).map((t) => (
             <span
               key={t}
-              className={`px-2 py-0.5 text-[10px] font-mono rounded border ${isDark ? "text-white/35" : "text-slate-500"}`}
+              className={`px-2.5 py-1 text-[10.5px] font-mono rounded-md border ${isDark ? "text-white/35" : "text-[#334155]"}`}
               style={{
-                backgroundColor: isDark ? "rgba(255,255,255,0.025)" : "rgba(0,0,0,0.04)",
-                borderColor:     isDark ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.08)",
+                backgroundColor: isDark ? "rgba(255,255,255,0.025)" : "rgba(255,255,255,0.85)",
+                borderColor:     isDark ? "rgba(255,255,255,0.07)" : "rgba(100,116,139,0.22)",
               }}
             >
               {t}
@@ -505,8 +512,8 @@ function ProjectCard({ project }: { project: Project }) {
 
         {/* Actions */}
         <div
-          className="flex items-center gap-2.5 pt-3 border-t"
-          style={{ borderColor: isDark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.07)" }}
+          className="flex items-center gap-2.5 pt-3.5 border-t mt-1"
+          style={{ borderColor: isDark ? "rgba(255,255,255,0.05)" : "rgba(100,116,139,0.15)" }}
         >
           <ActionButton href={project.github} variant="ghost">
             <GitBranch className="w-3 h-3" />
@@ -531,18 +538,20 @@ function ActionButton({ href, variant, accent, children }: ActionButtonProps) {
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-[12px] font-medium transition-all duration-200 hover:opacity-80"
+      className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-[12px] font-semibold transition-all duration-200 hover:opacity-90 hover:scale-[1.03] active:scale-[0.97]"
       style={
         variant === "accent"
           ? {
-              backgroundColor: accent(0.1),
-              color:           accent(1),
-              border:          `1px solid ${accent(0.22)}`,
+              background:      isDark ? accent(0.1) : `linear-gradient(135deg, ${accent(0.15)}, ${accent(0.08)})`,
+              color:           isDark ? accent(1) : accent(0.95),
+              border:          `1px solid ${isDark ? accent(0.22) : accent(0.35)}`,
+              boxShadow:       isDark ? "none" : `0 2px 10px ${accent(0.18)}`,
             }
           : {
-              backgroundColor: isDark ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.04)",
-              color:           isDark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.5)",
-              border:          isDark ? "1px solid rgba(255,255,255,0.09)" : "1px solid rgba(0,0,0,0.09)",
+              backgroundColor: isDark ? "rgba(255,255,255,0.04)" : "rgba(255,255,255,0.90)",
+              color:           isDark ? "rgba(255,255,255,0.5)" : "#334155",
+              border:          isDark ? "1px solid rgba(255,255,255,0.09)" : "1px solid rgba(100,116,139,0.30)",
+              boxShadow:       isDark ? "none" : "0 2px 8px rgba(15,23,42,0.06)",
             }
       }
     >
