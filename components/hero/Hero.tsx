@@ -101,17 +101,18 @@ export default function Hero() {
             {/* Heading */}
             <motion.h1
               {...fadeUp(0.18)}
-              className="text-5xl sm:text-6xl lg:text-[72px] font-bold leading-[0.98] tracking-tight"
+              className="text-5xl sm:text-6xl lg:text-[76px] font-black leading-[0.96] tracking-tight"
             >
-              <span className={isDark ? "text-white block" : "text-[#0F172A] block font-extrabold"}>
+              <span className={isDark ? "text-white block" : "text-[#050F1E] block"}>
                 Md Fatin Hasnat
               </span>
 
               <span
                 className="block text-transparent bg-clip-text"
                 style={{
-                  backgroundImage:
-                    "linear-gradient(100deg, #22d3ee 0%, #38bdf8 55%, #818cf8 100%)",
+                  backgroundImage: isDark
+                    ? "linear-gradient(100deg, #22d3ee 0%, #38bdf8 55%, #818cf8 100%)"
+                    : "linear-gradient(100deg, #0891b2 0%, #0ea5e9 50%, #6366f1 100%)",
                 }}
               >
                 Patwary
@@ -121,14 +122,15 @@ export default function Hero() {
             {/* Subtitle */}
             <motion.p
               {...fadeUp(0.28)}
-              className={`text-lg sm:text-xl font-light tracking-[0.04em] ${isDark ? "text-white/60" : "text-[#475569]"}`}
+              className={`text-xl sm:text-2xl tracking-[0.02em] ${isDark ? "text-white/60 font-light" : "text-[#334155] font-medium"}`}
             >
               AI Engineer
 
               <span
-                className="inline-flex mx-2.5 w-1.5 h-1.5 rounded-full bg-cyan-400 align-middle"
+                className="inline-flex mx-2.5 w-1.5 h-1.5 rounded-full align-middle"
                 style={{
-                  boxShadow: "0 0 8px rgba(6,182,212,0.9)",
+                  backgroundColor: isDark ? "#22d3ee" : "#0891b2",
+                  boxShadow: isDark ? "0 0 8px rgba(6,182,212,0.9)" : "0 0 8px rgba(8,145,178,0.7)",
                 }}
               />
 
@@ -138,15 +140,15 @@ export default function Hero() {
             {/* Description */}
             <motion.p
               {...fadeUp(0.37)}
-              className={`text-[15px] leading-[1.95] max-w-[560px] mx-auto lg:mx-0 ${isDark ? "text-white/45" : "text-[#64748B]"}`}
+              className={`text-[15.5px] leading-[1.9] max-w-[560px] mx-auto lg:mx-0 ${isDark ? "text-white/45" : "text-[#475569]"}`}
             >
               Building intelligent systems at the
               intersection of{" "}
-              <span className={isDark ? "text-white/75" : "text-[#334155]"}>
+              <span className={isDark ? "text-white/75" : "text-[#0F172A] font-semibold"}>
                 machine learning
               </span>
               ,{" "}
-              <span className={isDark ? "text-white/75" : "text-[#334155]"}>
+              <span className={isDark ? "text-white/75" : "text-[#0F172A] font-semibold"}>
                 NLP
               </span>
               , and impactful innovation.
@@ -266,13 +268,14 @@ function ProfileImageCard({ isDark }: { isDark: boolean }) {
   return (
     <div className="relative flex items-center justify-center w-72 h-72 sm:w-[430px] sm:h-[430px]">
 
-      {/* Main Glow */}
+      {/* Main Glow — stronger in light mode */}
       <div
         className="absolute inset-0 rounded-full"
         style={{
-          background:
-            "radial-gradient(circle, rgba(6,182,212,0.18) 0%, transparent 65%)",
-          filter: "blur(42px)",
+          background: isDark
+            ? "radial-gradient(circle, rgba(6,182,212,0.18) 0%, transparent 65%)"
+            : "radial-gradient(circle, rgba(8,145,178,0.28) 0%, rgba(6,182,212,0.10) 45%, transparent 70%)",
+          filter: "blur(48px)",
         }}
       />
 
@@ -286,7 +289,7 @@ function ProfileImageCard({ isDark }: { isDark: boolean }) {
         }}
         className="absolute inset-0 rounded-full"
         style={{
-          border: "1px dashed rgba(6,182,212,0.18)",
+          border: isDark ? "1px dashed rgba(6,182,212,0.18)" : "1px dashed rgba(8,145,178,0.32)",
           willChange: "transform",
         }}
       />
@@ -301,7 +304,7 @@ function ProfileImageCard({ isDark }: { isDark: boolean }) {
         }}
         className="absolute top-8 right-8 bottom-8 left-8 rounded-full"
         style={{
-          border: "1px dashed rgba(129,140,248,0.16)",
+          border: isDark ? "1px dashed rgba(129,140,248,0.16)" : "1px dashed rgba(99,102,241,0.28)",
           willChange: "transform",
         }}
       />
@@ -323,10 +326,12 @@ function ProfileImageCard({ isDark }: { isDark: boolean }) {
         <div
           className="relative w-56 h-56 sm:w-72 sm:h-72 rounded-full overflow-hidden"
           style={{
-            border:
-              "2px solid rgba(6,182,212,0.35)",
-            boxShadow:
-              "0 0 60px rgba(6,182,212,0.2)",
+            border: isDark
+              ? "2px solid rgba(6,182,212,0.35)"
+              : "3px solid rgba(8,145,178,0.65)",
+            boxShadow: isDark
+              ? "0 0 60px rgba(6,182,212,0.2)"
+              : "0 0 0 6px rgba(8,145,178,0.08), 0 8px 48px rgba(8,145,178,0.25)",
           }}
         >
           <Image
@@ -344,17 +349,19 @@ function ProfileImageCard({ isDark }: { isDark: boolean }) {
           style={{
             backgroundColor: isDark
               ? "rgba(2,12,24,0.9)"
-              : "rgba(240,244,248,0.92)",
-            borderColor:
-              "rgba(6,182,212,0.22)",
-            boxShadow:
-              "0 0 30px rgba(6,182,212,0.12)",
+              : "rgba(255,255,255,0.96)",
+            borderColor: isDark
+              ? "rgba(6,182,212,0.22)"
+              : "rgba(8,145,178,0.35)",
+            boxShadow: isDark
+              ? "0 0 30px rgba(6,182,212,0.12)"
+              : "0 4px 20px rgba(15,23,42,0.10)",
           }}
         >
           <div className="flex items-center gap-2 whitespace-nowrap">
-            <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
+            <Sparkles className={`w-3.5 h-3.5 ${isDark ? "text-cyan-400" : "text-cyan-600"}`} />
 
-            <span className="text-cyan-400 font-medium tracking-wide">
+            <span className={`font-semibold tracking-wide ${isDark ? "text-cyan-400" : "text-cyan-700"}`}>
               AI Engineer
             </span>
           </div>
@@ -366,17 +373,19 @@ function ProfileImageCard({ isDark }: { isDark: boolean }) {
           style={{
             backgroundColor: isDark
               ? "rgba(2,12,24,0.9)"
-              : "rgba(240,244,248,0.92)",
-            borderColor:
-              "rgba(129,140,248,0.22)",
-            boxShadow:
-              "0 0 30px rgba(129,140,248,0.12)",
+              : "rgba(255,255,255,0.96)",
+            borderColor: isDark
+              ? "rgba(129,140,248,0.22)"
+              : "rgba(99,102,241,0.35)",
+            boxShadow: isDark
+              ? "0 0 30px rgba(129,140,248,0.12)"
+              : "0 4px 20px rgba(15,23,42,0.10)",
           }}
         >
           <div className="flex items-center gap-2 whitespace-nowrap">
-            <Sparkles className="w-3.5 h-3.5 text-indigo-400" />
+            <Sparkles className={`w-3.5 h-3.5 ${isDark ? "text-indigo-400" : "text-indigo-500"}`} />
 
-            <span className="text-indigo-300 font-medium tracking-wide">
+            <span className={`font-semibold tracking-wide ${isDark ? "text-indigo-300" : "text-indigo-600"}`}>
               Researcher
             </span>
           </div>
@@ -395,16 +404,21 @@ function PrimaryButton({
   children: ReactNode;
   onClick?: () => void;
 }) {
+  const isDark = useIsDark();
   return (
     <motion.button
       onClick={onClick}
       whileHover={{ scale: 1.03 }}
       whileTap={{ scale: 0.97 }}
-      className="flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl text-[13.5px] font-semibold tracking-wide text-[#020c18]"
+      className="flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl text-[13.5px] font-semibold tracking-wide text-white"
       style={{
-        backgroundColor: "#22d3ee",
-        boxShadow:
-          "0 0 34px rgba(34,211,238,0.34)",
+        background: isDark
+          ? "#22d3ee"
+          : "linear-gradient(135deg, #0891b2 0%, #0ea5e9 100%)",
+        color: isDark ? "#020c18" : "#ffffff",
+        boxShadow: isDark
+          ? "0 0 34px rgba(34,211,238,0.34)"
+          : "0 4px 20px rgba(8,145,178,0.40), 0 1px 4px rgba(8,145,178,0.25)",
       }}
     >
       {children}
