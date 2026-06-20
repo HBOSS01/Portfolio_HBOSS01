@@ -84,14 +84,12 @@ export default function Cursor() {
           width:           "44px",
           height:          "44px",
           borderRadius:    "50%",
-          background:      "rgba(99, 179, 237, 0.18)",
-          border:          "1.5px solid rgba(99, 179, 237, 0.55)",
-          backdropFilter:  "blur(2px)",
+          background:      "rgba(59, 130, 246, 0.12)",
+          border:          "2px solid rgba(59, 130, 246, 0.75)",
           pointerEvents:   "none",
           zIndex:          99999,
           willChange:      "transform",
           transformOrigin: "center center",
-          mixBlendMode:    "screen",
         }}
       />
 
