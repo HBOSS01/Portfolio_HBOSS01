@@ -123,12 +123,13 @@ export default function Contact() {
           </span>
 
           <h2 className="mt-5 text-4xl sm:text-5xl font-bold tracking-tight">
-            <span className={isDark ? "text-white" : "text-slate-900"}>Contact </span>
+            <span className={isDark ? "text-white" : "text-[#050F1E]"}>Contact </span>
             <span
               className="text-transparent bg-clip-text"
               style={{
-                backgroundImage:
-                  "linear-gradient(100deg, #22d3ee 0%, #38bdf8 55%, #818cf8 100%)",
+                backgroundImage: isDark
+                  ? "linear-gradient(100deg, #22d3ee 0%, #38bdf8 55%, #818cf8 100%)"
+                  : "linear-gradient(100deg, #0891b2 0%, #0ea5e9 50%, #6366f1 100%)",
               }}
             >
               Me
@@ -143,7 +144,7 @@ export default function Contact() {
             }}
           />
 
-          <p className={`mt-5 text-[14.5px] max-w-lg leading-relaxed ${isDark ? "text-white/38" : "text-slate-500"}`}>
+          <p className={`mt-5 text-[14.5px] max-w-lg leading-relaxed ${isDark ? "text-white/38" : "text-[#475569]"}`}>
             Open to research collaborations, AI engineering roles, and
             interesting project conversations. Let&apos;s build something exceptional.
           </p>
@@ -160,8 +161,9 @@ export default function Contact() {
               <div
                 className="inline-flex items-center gap-3 px-4 py-3 rounded-2xl border"
                 style={{
-                  backgroundColor: "rgba(6,182,212,0.04)",
-                  borderColor:     "rgba(6,182,212,0.14)",
+                  backgroundColor: isDark ? "rgba(6,182,212,0.04)" : "rgba(8,145,178,0.06)",
+                  borderColor:     isDark ? "rgba(6,182,212,0.14)" : "rgba(8,145,178,0.25)",
+                  boxShadow:       isDark ? "none" : "0 4px 16px rgba(8,145,178,0.08)",
                 }}
               >
                 <div className="relative flex-shrink-0">
@@ -176,10 +178,10 @@ export default function Contact() {
                   />
                 </div>
                 <div>
-                  <p className={`text-[12px] font-medium ${isDark ? "text-white/65" : "text-slate-700"}`}>
+                  <p className={`text-[12.5px] font-semibold ${isDark ? "text-white/65" : "text-[#0F172A]"}`}>
                     Available for opportunities
                   </p>
-                  <p className={`text-[10.5px] font-mono mt-0.5 ${isDark ? "text-white/30" : "text-slate-500"}`}>
+                  <p className={`text-[11px] font-mono mt-0.5 ${isDark ? "text-white/30" : "text-[#475569]"}`}>
                     Open to AI / ML roles & research
                   </p>
                 </div>
@@ -188,16 +190,16 @@ export default function Contact() {
 
             {/* Message */}
             <motion.div {...scrollFadeUp(0.15)} className="flex flex-col gap-3">
-              <p className={`text-[15px] leading-[1.9] ${isDark ? "text-white/50" : "text-slate-500"}`}>
+              <p className={`text-[15px] leading-[1.9] ${isDark ? "text-white/50" : "text-[#475569]"}`}>
                 I&apos;m{" "}
-                <span className={`font-medium ${isDark ? "text-white/80" : "text-slate-800"}`}>
+                <span className={`font-semibold ${isDark ? "text-white/80" : "text-[#0F172A]"}`}>
                   Md Fatin Hasnat Patwary
                 </span>
                 , an AI Engineer & Researcher passionate about building
                 intelligent systems that matter. Whether it&apos;s a research
                 collaboration, a challenging engineering role, or just an
                 interesting idea —{" "}
-                <span className={isDark ? "text-white/70" : "text-slate-700"}>I&apos;m always open to a conversation.</span>
+                <span className={`font-medium ${isDark ? "text-white/70" : "text-[#334155]"}`}>I&apos;m always open to a conversation.</span>
               </p>
             </motion.div>
 
@@ -211,11 +213,14 @@ export default function Contact() {
                 <div key={text} className="flex items-center gap-3">
                   <div
                     className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
-                    style={{ backgroundColor: "rgba(6,182,212,0.08)" }}
+                    style={{
+                      backgroundColor: isDark ? "rgba(6,182,212,0.08)" : "rgba(8,145,178,0.10)",
+                      border:          isDark ? "none" : "1px solid rgba(8,145,178,0.20)",
+                    }}
                   >
-                    <Icon className="w-3.5 h-3.5 text-cyan-400" />
+                    <Icon className={`w-3.5 h-3.5 ${isDark ? "text-cyan-400" : "text-cyan-600"}`} />
                   </div>
-                  <span className={`text-[13px] font-mono ${isDark ? "text-white/45" : "text-slate-500"}`}>
+                  <span className={`text-[13px] font-mono ${isDark ? "text-white/45" : "text-[#334155]"}`}>
                     {text}
                   </span>
                 </div>
@@ -227,14 +232,15 @@ export default function Contact() {
               {...scrollFadeUp(0.24)}
               className="h-px w-full"
               style={{
-                background:
-                  "linear-gradient(90deg, rgba(6,182,212,0.2), transparent)",
+                background: isDark
+                  ? "linear-gradient(90deg, rgba(6,182,212,0.2), transparent)"
+                  : "linear-gradient(90deg, rgba(8,145,178,0.35), transparent)",
               }}
             />
 
             {/* Social links */}
             <motion.div {...scrollFadeUp(0.28)}>
-              <p className={`text-[11px] font-mono tracking-[0.16em] uppercase mb-4 ${isDark ? "text-white/28" : "text-slate-500"}`}>
+              <p className={`text-[11px] font-mono tracking-[0.16em] uppercase mb-4 ${isDark ? "text-white/28" : "text-[#64748B]"}`}>
                 Find me on
               </p>
               <div className="grid grid-cols-2 gap-3">
@@ -267,27 +273,29 @@ function SocialCard({ link }: { link: SocialLink }) {
       href={link.href}
       target="_blank"
       rel="noopener noreferrer"
-      whileHover={{ y: -3, scale: 1.02 }}
+      whileHover={{ y: -4, scale: 1.025 }}
       transition={{ duration: 0.2, ease: "easeOut" }}
-      className="flex items-center gap-3 p-3.5 rounded-xl border"
+      className="flex items-center gap-3 p-4 rounded-xl border"
       style={{
-        backgroundColor:      isDark ? "rgba(255,255,255,0.02)" : "rgba(255,255,255,0.85)",
-        borderColor:           accent(isDark ? 0.16 : 0.18),
+        backgroundColor:      isDark ? "rgba(255,255,255,0.02)" : "rgba(255,255,255,0.95)",
+        borderColor:           accent(isDark ? 0.16 : 0.25),
         backdropFilter:       "blur(12px)",
         WebkitBackdropFilter: "blur(12px)",
-        boxShadow:            isDark ? "none" : "0 8px 28px rgba(15,23,42,0.07)",
+        boxShadow:            isDark ? "none" : `0 1px 0 ${accent(0.18)}, 0 8px 28px rgba(15,23,42,0.08)`,
+        transition:           "box-shadow 0.2s ease, border-color 0.2s ease",
       }}
     >
       <div
-        className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
+        className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
         style={{
-          backgroundColor: accent(0.1),
-          boxShadow:       `0 0 12px ${accent(0.2)}`,
+          backgroundColor: isDark ? accent(0.1) : accent(0.10),
+          border:          isDark ? "none" : `1.5px solid ${accent(0.28)}`,
+          boxShadow:       `0 0 12px ${accent(isDark ? 0.2 : 0.14)}`,
         }}
       >
-        <Icon className="w-3.5 h-3.5" style={{ color: accent(1) }} />
+        <Icon className="w-4 h-4" style={{ color: accent(isDark ? 1 : 0.95) }} />
       </div>
-      <span className={`text-[12.5px] font-medium ${isDark ? "text-white/55" : "text-slate-600"}`}>
+      <span className={`text-[13px] font-semibold ${isDark ? "text-white/55" : "text-[#0F172A]"}`}>
         {link.label}
       </span>
     </motion.a>
@@ -337,13 +345,15 @@ function ContactForm() {
 
   return (
     <div
-      className="relative p-7 sm:p-8 rounded-3xl border overflow-hidden"
+      className="relative p-8 sm:p-9 rounded-3xl border overflow-hidden"
       style={{
-        backgroundColor:      isDark ? "rgba(255,255,255,0.02)" : "rgba(255,255,255,0.90)",
-        borderColor:           "rgba(6,182,212,0.18)",
+        backgroundColor:      isDark ? "rgba(255,255,255,0.02)" : "rgba(255,255,255,0.97)",
+        borderColor:           isDark ? "rgba(6,182,212,0.18)" : "rgba(8,145,178,0.22)",
         backdropFilter:       "blur(20px)",
         WebkitBackdropFilter: "blur(20px)",
-        boxShadow:            isDark ? "none" : "0 10px 35px rgba(15,23,42,0.07)",
+        boxShadow:            isDark
+          ? "none"
+          : "0 1px 0 rgba(8,145,178,0.15), 0 16px 56px rgba(15,23,42,0.09), 0 4px 12px rgba(15,23,42,0.04)",
       }}
     >
       {/* Corner glows */}
@@ -414,15 +424,16 @@ function ContactForm() {
             className="relative flex flex-col gap-5"
             aria-label="Contact form"
           >
-            <div className="mb-1">
-              <p className={`text-[13px] font-semibold tracking-wide ${isDark ? "text-white/55" : "text-slate-600"}`}>
+            <div className="mb-2">
+              <p className={`text-[13.5px] font-bold tracking-wide ${isDark ? "text-white/55" : "text-[#0F172A]"}`}>
                 Send a message
               </p>
               <div
                 className="mt-2.5 h-px w-full"
                 style={{
-                  background:
-                    "linear-gradient(90deg, rgba(6,182,212,0.25), transparent)",
+                  background: isDark
+                    ? "linear-gradient(90deg, rgba(6,182,212,0.25), transparent)"
+                    : "linear-gradient(90deg, rgba(8,145,178,0.40), transparent)",
                 }}
               />
             </div>
@@ -475,10 +486,10 @@ function ContactForm() {
                 value={form.message}
                 onChange={handleChange}
                 required
-                className={`w-full resize-none rounded-xl px-4 py-3 text-[13px] ${isDark ? "placeholder:text-white/18" : "placeholder:text-slate-400"} outline-none transition-all duration-200 focus:border-cyan-400/40 ${isDark ? "text-white/65" : "text-slate-700"}`}
+                className={`w-full resize-none rounded-xl px-4 py-3 text-[13px] ${isDark ? "placeholder:text-white/18" : "placeholder:text-slate-400"} outline-none transition-all duration-200 ${isDark ? "text-white/65 focus:border-cyan-400/40" : "text-[#1E293B] focus:border-cyan-600/50 focus:ring-2 focus:ring-cyan-500/10"}`}
                 style={{
                   backgroundColor: isDark ? "rgba(255,255,255,0.03)" : "rgba(248,250,252,1)",
-                  border:          isDark ? "1px solid rgba(255,255,255,0.08)" : "1px solid rgba(100,116,139,0.28)",
+                  border:          isDark ? "1px solid rgba(255,255,255,0.08)" : "1px solid rgba(100,116,139,0.32)",
                 }}
               />
             </div>
@@ -495,13 +506,20 @@ function ContactForm() {
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               transition={{ duration: 0.18 }}
-              className={`relative flex items-center justify-center gap-2.5 w-full py-3.5 rounded-xl text-[13.5px] font-semibold tracking-wide overflow-hidden mt-1 ${isDark ? "text-[#020c18]" : "text-white"}`}
+              className={`relative flex items-center justify-center gap-2.5 w-full py-4 rounded-xl text-[13.5px] font-semibold tracking-wide overflow-hidden mt-1 text-white`}
               style={{
-                backgroundColor: "#22d3ee",
-                boxShadow:       loading
+                background:  loading
+                  ? "#22d3ee"
+                  : isDark
+                    ? "#22d3ee"
+                    : "linear-gradient(135deg, #0891b2 0%, #0ea5e9 60%, #38bdf8 100%)",
+                color:       isDark ? "#020c18" : "#ffffff",
+                boxShadow:   loading
                   ? "none"
-                  : "0 0 28px rgba(34,211,238,0.32)",
-                opacity: loading ? 0.7 : 1,
+                  : isDark
+                    ? "0 0 28px rgba(34,211,238,0.32)"
+                    : "0 4px 20px rgba(8,145,178,0.40), 0 1px 4px rgba(8,145,178,0.25)",
+                opacity: loading ? 0.75 : 1,
               }}
             >
               {loading ? (
@@ -553,13 +571,13 @@ function Field({
     <div className="flex flex-col gap-1.5">
       <label
         htmlFor={name}
-        className={`text-[11px] font-mono tracking-[0.12em] uppercase ${isDark ? "text-white/35" : "text-slate-400"}`}
+        className={`text-[11px] font-mono tracking-[0.12em] uppercase font-semibold ${isDark ? "text-white/35" : "text-[#64748B]"}`}
       >
         {label}
       </label>
       <div className="relative">
         <Icon
-          className={`absolute left-3.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 pointer-events-none ${isDark ? "text-white/20" : "text-slate-400"}`}
+          className={`absolute left-3.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 pointer-events-none ${isDark ? "text-white/20" : "text-cyan-600/60"}`}
         />
         <input
           id={name}
@@ -569,10 +587,10 @@ function Field({
           value={value}
           onChange={onChange}
           required={required}
-          className={`w-full rounded-xl pl-9 pr-4 py-3 text-[13px] ${isDark ? "placeholder:text-white/18" : "placeholder:text-slate-400"} outline-none transition-all duration-200 focus:border-cyan-400/40 ${isDark ? "text-white/65" : "text-slate-700"}`}
+          className={`w-full rounded-xl pl-9 pr-4 py-3 text-[13px] ${isDark ? "placeholder:text-white/18" : "placeholder:text-slate-400"} outline-none transition-all duration-200 ${isDark ? "text-white/65 focus:border-cyan-400/40" : "text-[#1E293B] focus:border-cyan-600/50 focus:ring-2 focus:ring-cyan-500/10"}`}
           style={{
             backgroundColor: isDark ? "rgba(255,255,255,0.03)" : "rgba(248,250,252,1)",
-            border:          isDark ? "1px solid rgba(255,255,255,0.08)" : "1px solid rgba(100,116,139,0.28)",
+            border:          isDark ? "1px solid rgba(255,255,255,0.08)" : "1px solid rgba(100,116,139,0.32)",
           }}
         />
       </div>

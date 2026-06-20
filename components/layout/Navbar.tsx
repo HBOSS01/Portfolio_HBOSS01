@@ -103,14 +103,14 @@ export default function Navbar() {
           backgroundColor: scrolled
             ? isDark
               ? "rgba(2,12,24,0.82)"
-              : "rgba(245,247,251,0.94)"
+              : "rgba(255,255,255,0.85)"
             : "transparent",
           backdropFilter: scrolled ? "blur(28px) saturate(180%)" : "blur(4px)",
           WebkitBackdropFilter: scrolled
             ? "blur(28px) saturate(180%)"
             : "blur(4px)",
-          borderBottom: scrolled ? (isDark ? "1px solid rgba(6,182,212,0.12)" : "1px solid rgba(15,23,42,0.08)") : "none",
-          boxShadow: scrolled && !isDark ? "0 4px 24px rgba(15,23,42,0.06)" : undefined,
+          borderBottom: scrolled ? (isDark ? "1px solid rgba(6,182,212,0.12)" : "1px solid rgba(100,116,139,0.15)") : "none",
+          boxShadow: scrolled && !isDark ? "0 8px 32px rgba(15,23,42,0.06)" : undefined,
         }}
       >
         <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
@@ -131,11 +131,12 @@ export default function Navbar() {
               <div
                 className="relative w-10 h-10 rounded-xl flex items-center justify-center border transition-all duration-300"
                 style={{
-                  backgroundColor: "rgba(6,182,212,0.08)",
-                  borderColor: "rgba(6,182,212,0.25)",
+                  backgroundColor: isDark ? "rgba(6,182,212,0.08)" : "rgba(8,145,178,0.08)",
+                  borderColor:     isDark ? "rgba(6,182,212,0.25)" : "rgba(8,145,178,0.30)",
+                  boxShadow:       isDark ? "none" : "0 2px 8px rgba(8,145,178,0.15)",
                 }}
               >
-                <span className="font-mono font-bold text-sm text-cyan-400 tracking-wider z-10">
+                <span className={`font-mono font-bold text-sm tracking-wider z-10 ${isDark ? "text-cyan-400" : "text-cyan-700"}`}>
                   MDF
                 </span>
 
@@ -148,11 +149,11 @@ export default function Navbar() {
               </div>
 
               <div className="hidden sm:flex flex-col leading-none gap-1">
-                <span className={cn("text-[13px] font-light tracking-[0.12em] uppercase transition-colors duration-300", isDark ? "text-white/75 group-hover:text-white" : "text-slate-600 group-hover:text-slate-900")}>
+                <span className={cn("text-[13px] font-medium tracking-[0.12em] uppercase transition-colors duration-300", isDark ? "text-white/75 group-hover:text-white" : "text-[#1E293B] group-hover:text-black")}>
                   MD F HASNAT
                 </span>
 
-                <span className={cn("text-[10px] font-mono tracking-[0.22em] uppercase", isDark ? "text-white/35" : "text-slate-400")}>
+                <span className={cn("text-[10px] font-mono tracking-[0.22em] uppercase font-medium", isDark ? "text-white/35" : "text-[#64748B]")}>
                   AI Engineer
                 </span>
               </div>
@@ -178,10 +179,11 @@ export default function Navbar() {
                 onClick={() => scrollTo("contact")}
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
-                className="hidden sm:flex items-center gap-1.5 px-4 py-2 rounded-xl text-cyan-400 text-[13px] font-medium tracking-wide border transition-all duration-300"
+                className={cn("hidden sm:flex items-center gap-1.5 px-4 py-2 rounded-xl text-[13px] tracking-wide border transition-all duration-300", isDark ? "text-cyan-400 font-medium" : "text-white font-semibold")}
                 style={{
-                  backgroundColor: "rgba(6,182,212,0.08)",
-                  borderColor: "rgba(6,182,212,0.3)",
+                  background:  isDark ? "rgba(6,182,212,0.08)" : "linear-gradient(135deg, #0891b2 0%, #0ea5e9 100%)",
+                  borderColor: isDark ? "rgba(6,182,212,0.3)"  : "rgba(8,145,178,0.40)",
+                  boxShadow:   isDark ? "none"                 : "0 4px 14px rgba(8,145,178,0.30), inset 0 1px 0 rgba(255,255,255,0.2)",
                 }}
               >
                 Let&apos;s Talk
@@ -197,10 +199,11 @@ export default function Navbar() {
                 whileTap={{ scale: 0.9 }}
                 className={cn(
                   "md:hidden w-10 h-10 flex items-center justify-center rounded-lg border",
-                  isDark ? "text-white/60" : "text-slate-600"
+                  isDark ? "text-white/60" : "text-[#475569] bg-white"
                 )}
                 style={{
-                  borderColor: isDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)",
+                  borderColor: isDark ? "rgba(255,255,255,0.1)" : "rgba(100,116,139,0.25)",
+                  boxShadow:   isDark ? "none" : "0 2px 8px rgba(15,23,42,0.05)",
                 }}
               >
                 <AnimatePresence mode="wait" initial={false}>
@@ -260,8 +263,9 @@ export default function Navbar() {
               }}
               className="absolute bottom-0 left-0 right-0 h-px"
               style={{
-                background:
-                  "linear-gradient(90deg, transparent 0%, rgba(6,182,212,0.5) 40%, rgba(6,182,212,0.5) 60%, transparent 100%)",
+                background: isDark
+                  ? "linear-gradient(90deg, transparent 0%, rgba(6,182,212,0.5) 40%, rgba(6,182,212,0.5) 60%, transparent 100%)"
+                  : "linear-gradient(90deg, transparent 0%, rgba(8,145,178,0.5) 40%, rgba(8,145,178,0.5) 60%, transparent 100%)",
               }}
             />
           )}
@@ -348,10 +352,10 @@ function NavLink({
       className={cn(
         "relative px-3.5 py-2 text-[13.5px] tracking-wide rounded-lg group transition-colors duration-300 font-medium",
         isActive
-          ? "text-cyan-500"
+          ? isDark ? "text-cyan-500" : "text-cyan-700 font-semibold"
           : isDark
             ? "text-white/45 hover:text-white/85"
-            : "text-slate-500 hover:text-slate-900"
+            : "text-[#475569] hover:text-[#0F172A]"
       )}
     >
       <span className="relative z-10">
@@ -363,7 +367,8 @@ function NavLink({
           layoutId="desktop-active-bg"
           className="absolute inset-0 rounded-lg"
           style={{
-            background: "rgba(6,182,212,0.12)",
+            background: isDark ? "rgba(6,182,212,0.12)" : "rgba(8,145,178,0.12)",
+            border:     isDark ? "none" : "1px solid rgba(8,145,178,0.18)",
           }}
           transition={{
             type: "spring",

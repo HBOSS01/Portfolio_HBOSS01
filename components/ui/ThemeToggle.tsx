@@ -31,10 +31,11 @@ export default function ThemeToggle() {
       style={{
         backgroundColor: isDark
           ? "rgba(255,255,255,0.05)"
-          : "rgba(6,182,212,0.08)",
+          : "rgba(255,255,255,0.9)",
         borderColor: isDark
           ? "rgba(255,255,255,0.10)"
-          : "rgba(6,182,212,0.25)",
+          : "rgba(100,116,139,0.25)",
+        boxShadow: isDark ? "none" : "0 2px 8px rgba(15,23,42,0.08)",
       }}
     >
       <AnimatePresence mode="wait" initial={false}>
