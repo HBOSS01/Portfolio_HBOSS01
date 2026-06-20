@@ -205,7 +205,7 @@ function FeaturedCard({ project }: { project: Project }) {
 
   return (
     <motion.div
-      whileHover={{ y: -5 }}
+      whileHover={{ y: -6 }}
       transition={{ duration: 0.24, ease: "easeOut" }}
       className="relative rounded-2xl border overflow-hidden"
       style={{
@@ -215,7 +215,8 @@ function FeaturedCard({ project }: { project: Project }) {
         WebkitBackdropFilter: "blur(16px)",
         boxShadow:             isDark
           ? "none"
-          : `0 1px 0 ${accent(0.20)}, 0 16px 56px rgba(15,23,42,0.10)`,
+          : `0 1px 0 ${accent(0.22)}, 0 20px 64px rgba(15,23,42,0.11), 0 4px 16px rgba(15,23,42,0.06)`,
+        transition:            "box-shadow 0.3s ease, border-color 0.3s ease",
       }}
     >
       <div className="grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr]">
@@ -226,10 +227,12 @@ function FeaturedCard({ project }: { project: Project }) {
           <div
             className="absolute top-0 left-0 pointer-events-none"
             style={{
-              width:     "300px",
-              height:    "300px",
-              background: `radial-gradient(circle, ${accent(0.08)} 0%, transparent 70%)`,
-              filter:    "blur(32px)",
+              width:     "340px",
+              height:    "340px",
+              background: isDark
+                ? `radial-gradient(circle, ${accent(0.08)} 0%, transparent 70%)`
+                : `radial-gradient(circle, ${accent(0.14)} 0%, transparent 70%)`,
+              filter:    "blur(40px)",
               transform: "translate(-40%, -40%)",
             }}
           />
@@ -240,15 +243,16 @@ function FeaturedCard({ project }: { project: Project }) {
               <span
                 className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[10px] font-mono tracking-widest uppercase"
                 style={{
-                  backgroundColor: accent(0.1),
-                  color:           accent(1),
-                  border:          `1px solid ${accent(0.25)}`,
+                  backgroundColor: isDark ? accent(0.1) : accent(0.12),
+                  color:           isDark ? accent(1) : accent(0.95),
+                  border:          `1px solid ${isDark ? accent(0.25) : accent(0.38)}`,
+                  boxShadow:       isDark ? "none" : `0 2px 8px ${accent(0.15)}`,
                 }}
               >
                 <Star className="w-2.5 h-2.5" />
                 Featured
               </span>
-              <span className={`text-[11px] font-mono tracking-wide ${isDark ? "text-white/25" : "text-slate-500"}`}>
+              <span className={`text-[11px] font-mono tracking-wide ${isDark ? "text-white/25" : "text-[#475569]"}`}>
                 {project.category}
               </span>
             </div>
@@ -295,7 +299,7 @@ function FeaturedCard({ project }: { project: Project }) {
         {/* Right: Visual panel */}
         <div
           className="hidden lg:block relative overflow-hidden"
-          style={{ borderLeft: `1px solid ${accent(0.1)}` }}
+          style={{ borderLeft: `1px solid ${isDark ? accent(0.1) : accent(0.22)}` }}
         >
           <ProjectVisual accent={accent} tech={project.tech} />
         </div>
@@ -358,11 +362,12 @@ function ProjectVisual({
           {tech.slice(0, 3).map((t, i) => (
             <motion.span
               key={t}
-              className="px-3.5 py-1.5 rounded-lg text-[10.5px] font-mono"
+              className={`px-3.5 py-1.5 rounded-lg text-[10.5px] font-mono font-medium`}
               style={{
-                backgroundColor: isDark ? "rgba(2,12,24,0.92)" : "rgba(235,242,250,0.95)",
-                border:          `1px solid ${accent(0.18)}`,
-                color:           accent(0.85),
+                backgroundColor: isDark ? "rgba(2,12,24,0.92)" : "rgba(255,255,255,0.92)",
+                border:          `1px solid ${isDark ? accent(0.18) : accent(0.30)}`,
+                color:           isDark ? accent(0.85) : accent(0.95),
+                boxShadow:       isDark ? "none" : `0 2px 8px ${accent(0.12)}`,
               }}
               animate={{ y: [0, i % 2 === 0 ? -5 : 5, 0] }}
               transition={{
@@ -380,11 +385,11 @@ function ProjectVisual({
 
       {/* Left edge fade */}
       <div
-        className="absolute inset-y-0 left-0 w-10 pointer-events-none"
+        className="absolute inset-y-0 left-0 w-12 pointer-events-none"
         style={{
           background: isDark
             ? "linear-gradient(90deg, rgba(2,12,24,0.75), transparent)"
-            : "linear-gradient(90deg, rgba(235,242,250,0.75), transparent)",
+            : "linear-gradient(90deg, rgba(241,247,253,0.90), transparent)",
         }}
       />
     </div>
@@ -429,7 +434,7 @@ function ProjectCard({ project }: { project: Project }) {
           style={{
             backgroundImage: isDark
             ? "radial-gradient(rgba(255,255,255,0.045) 1px, transparent 1px)"
-            : "radial-gradient(rgba(0,0,0,0.05) 1px, transparent 1px)",
+            : "radial-gradient(rgba(8,145,178,0.14) 1px, transparent 1px)",
             backgroundSize: "20px 20px",
           }}
         />
@@ -446,9 +451,9 @@ function ProjectCard({ project }: { project: Project }) {
         <div
           className="absolute top-0 right-0 pointer-events-none"
           style={{
-            width:     "130px",
-            height:    "130px",
-            background: `radial-gradient(circle, ${accent(0.14)} 0%, transparent 70%)`,
+            width:     "150px",
+            height:    "150px",
+            background: `radial-gradient(circle, ${accent(isDark ? 0.14 : 0.22)} 0%, transparent 70%)`,
             filter:    "blur(20px)",
             transform: "translate(35%, -35%)",
           }}
@@ -457,15 +462,15 @@ function ProjectCard({ project }: { project: Project }) {
         {/* Category label */}
         <div className="relative flex flex-col items-center gap-2">
           <span
-            className="text-[10px] font-mono tracking-[0.18em] uppercase"
-            style={{ color: accent(0.7) }}
+            className={`text-[10px] font-mono tracking-[0.18em] uppercase font-semibold`}
+            style={{ color: isDark ? accent(0.7) : accent(1) }}
           >
             {project.category}
           </span>
           <div
             className="h-px w-10"
             style={{
-              background: `linear-gradient(90deg, transparent, ${accent(0.5)}, transparent)`,
+              background: `linear-gradient(90deg, transparent, ${isDark ? accent(0.5) : accent(0.7)}, transparent)`,
             }}
           />
         </div>
