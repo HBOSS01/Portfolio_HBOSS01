@@ -9,10 +9,14 @@ const Projects   = dynamic(() => import("@/components/projects/Projects"));
 const Experience = dynamic(() => import("@/components/experience/Experience"));
 const Contact    = dynamic(() => import("@/components/contact/Contact"));
 const Footer     = dynamic(() => import("@/components/layout/Footer"));
+const Cursor     = dynamic(() => import("@/components/ui/Cursor"),   { ssr: false });
 
 export default function Home() {
   return (
     <main className="relative min-h-screen overflow-x-hidden text-white">
+
+      {/* CURSOR FOLLOWER */}
+      <Cursor />
 
       {/* FIXED BACKGROUND */}
       <GlobalBackground />
