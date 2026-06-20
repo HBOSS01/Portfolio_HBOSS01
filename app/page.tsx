@@ -2,6 +2,7 @@ import dynamic from "next/dynamic";
 import GlobalBackground from "@/components/layout/GlobalBackground";
 import Navbar from "@/components/layout/Navbar";
 import Hero from "@/components/hero/Hero";
+import Cursor from "@/components/ui/Cursor";
 
 const About      = dynamic(() => import("@/components/about/About"));
 const Skills     = dynamic(() => import("@/components/skills/Skills"));
@@ -9,7 +10,6 @@ const Projects   = dynamic(() => import("@/components/projects/Projects"));
 const Experience = dynamic(() => import("@/components/experience/Experience"));
 const Contact    = dynamic(() => import("@/components/contact/Contact"));
 const Footer     = dynamic(() => import("@/components/layout/Footer"));
-const Cursor     = dynamic(() => import("@/components/ui/Cursor"),   { ssr: false });
 
 export default function Home() {
   return (
