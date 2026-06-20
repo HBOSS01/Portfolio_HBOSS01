@@ -61,6 +61,17 @@ export default function Cursor() {
       el.addEventListener("mouseleave", handleMouseLeaveLink);
     });
 
+    // Hide when mouse leaves window
+    const handleMouseLeaveWindow = () => {
+      gsap.to([bigCircle, smallCircle], { opacity: 0, duration: 0.2 });
+    };
+    const handleMouseEnterWindow = () => {
+      gsap.to([bigCircle, smallCircle], { opacity: 1, duration: 0.2 });
+    };
+
+    document.documentElement.addEventListener("mouseleave", handleMouseLeaveWindow);
+    document.documentElement.addEventListener("mouseenter", handleMouseEnterWindow);
+
     return () => {
       window.removeEventListener("mousemove", onMouseMove);
       gsap.ticker.remove(ticker);
@@ -69,6 +80,8 @@ export default function Cursor() {
         el.removeEventListener("mouseenter", handleMouseEnterLink);
         el.removeEventListener("mouseleave", handleMouseLeaveLink);
       });
+      document.documentElement.removeEventListener("mouseleave", handleMouseLeaveWindow);
+      document.documentElement.removeEventListener("mouseenter", handleMouseEnterWindow);
     };
   }, []);
 
@@ -84,8 +97,8 @@ export default function Cursor() {
           width:           "30px",
           height:          "30px",
           borderRadius:    "50%",
-          background:      "rgba(59, 130, 246, 0.12)",
-          border:          "2px solid rgba(59, 130, 246, 0.75)",
+          background:      "rgba(6, 182, 212, 0.12)",
+          border:          "2px solid rgba(6, 182, 212, 0.75)",
           pointerEvents:   "none",
           zIndex:          99999,
           willChange:      "transform",
@@ -103,8 +116,8 @@ export default function Cursor() {
           width:           "9px",
           height:          "9px",
           borderRadius:    "50%",
-          background:      "#3b82f6",
-          boxShadow:       "0 0 8px 2px rgba(59,130,246,0.7)",
+          background:      "#22d3ee",
+          boxShadow:       "0 0 8px 2px rgba(6, 182, 212, 0.7)",
           pointerEvents:   "none",
           zIndex:          100000,
           willChange:      "transform",
