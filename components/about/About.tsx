@@ -136,9 +136,9 @@ export default function About() {
 
             {/* Bio paragraphs */}
             <motion.div {...scrollFadeUp(0.1)} className="flex flex-col gap-4">
-              <p className={`text-[15px] leading-[1.9] ${isDark ? "text-white/50" : "text-slate-600"}`}>
+              <p className={`text-[15px] leading-[1.9] ${isDark ? "text-white/50" : "text-[#475569]"}`}>
                 I&apos;m{" "}
-                <span className={`font-medium ${isDark ? "text-white/80" : "text-slate-700"}`}>
+                <span className={`font-medium ${isDark ? "text-white/80" : "text-[#0F172A]"}`}>
                   Md Fatin Hasnat Patwary
                 </span>
                 , an AI Engineer and Researcher driven by a deep passion for
@@ -152,7 +152,7 @@ export default function About() {
                 <span className={isDark ? "text-white/70" : "text-slate-600"}>computer vision</span> —
                 bridging cutting-edge research with real-world engineering.
               </p>
-              <p className={`text-[15px] leading-[1.9] ${isDark ? "text-white/40" : "text-slate-500"}`}>
+              <p className={`text-[15px] leading-[1.9] ${isDark ? "text-white/40" : "text-[#64748B]"}`}>
                 I thrive at the intersection of innovation and precision —
                 whether fine-tuning large language models, designing RAG
                 pipelines, or training end-to-end computer vision
@@ -177,10 +177,10 @@ export default function About() {
                 <Zap className="w-4 h-4 text-cyan-400" />
               </div>
               <div>
-                <p className={`text-[13px] font-medium mb-1 ${isDark ? "text-white/65" : "text-slate-600"}`}>
+                <p className={`text-[13px] font-semibold mb-1 ${isDark ? "text-white/65" : "text-[#334155]"}`}>
                   What drives me
                 </p>
-                <p className={`text-[13px] leading-relaxed ${isDark ? "text-white/38" : "text-slate-500"}`}>
+                <p className={`text-[13px] leading-relaxed ${isDark ? "text-white/38" : "text-[#64748B]"}`}>
                   Building AI that doesn&apos;t just perform — but understands,
                   adapts, and empowers. Research-first thinking, production-grade
                   execution.
@@ -226,10 +226,11 @@ function StatCard({
       transition={{ duration: 0.22, ease: "easeOut" }}
       className="p-5 rounded-2xl border flex flex-col gap-3 h-full cursor-default select-none"
       style={{
-        backgroundColor: "rgba(6,182,212,0.04)",
-        borderColor: "rgba(6,182,212,0.1)",
+        backgroundColor: isDark ? "rgba(6,182,212,0.04)" : "rgba(255,255,255,0.88)",
+        borderColor: isDark ? "rgba(6,182,212,0.1)" : "rgba(0,180,255,0.14)",
         backdropFilter: "blur(12px)",
         WebkitBackdropFilter: "blur(12px)",
+        boxShadow: isDark ? "none" : "0 8px 28px rgba(15,23,42,0.07)",
       }}
     >
       <div className="flex items-center gap-3">
@@ -249,7 +250,7 @@ function StatCard({
           {value}
         </span>
       </div>
-      <span className={`text-[11.5px] tracking-wide leading-snug ${isDark ? "text-white/40" : "text-slate-500"}`}>
+      <span className={`text-[11.5px] tracking-wide leading-snug ${isDark ? "text-white/40" : "text-[#64748B]"}`}>
         {label}
       </span>
     </motion.div>
@@ -264,10 +265,11 @@ function GlassCard() {
     <div
       className="relative p-7 sm:p-8 rounded-3xl border overflow-hidden"
       style={{
-        backgroundColor: isDark ? "rgba(6,182,212,0.025)" : "rgba(255,255,255,0.7)",
-        borderColor: isDark ? "rgba(6,182,212,0.1)" : "rgba(6,182,212,0.15)",
+        backgroundColor: isDark ? "rgba(6,182,212,0.025)" : "rgba(255,255,255,0.88)",
+        borderColor: isDark ? "rgba(6,182,212,0.1)" : "rgba(0,180,255,0.13)",
         backdropFilter: "blur(24px)",
         WebkitBackdropFilter: "blur(24px)",
+        boxShadow: isDark ? "none" : "0 10px 35px rgba(15,23,42,0.07)",
       }}
     >
       {/* Corner glows */}
@@ -296,7 +298,7 @@ function GlassCard() {
         <section aria-label="Research areas">
           <div className="flex items-center gap-2 mb-4">
             <Sparkles className="w-4 h-4 text-cyan-400 shrink-0" />
-            <h3 className={`text-[12px] font-semibold tracking-[0.12em] uppercase ${isDark ? "text-white/55" : "text-slate-500"}`}>
+            <h3 className={`text-[12px] font-semibold tracking-[0.12em] uppercase ${isDark ? "text-white/55" : "text-[#475569]"}`}>
               Research Areas
             </h3>
           </div>
@@ -340,10 +342,10 @@ function GlassCard() {
               <li key={h.label} className="flex items-start gap-2.5">
                 <ChevronRight className="w-3.5 h-3.5 text-cyan-400 mt-0.5 shrink-0" />
                 <div>
-                  <p className={`text-[10.5px] tracking-[0.15em] uppercase font-mono mb-0.5 ${isDark ? "text-white/30" : "text-slate-500"}`}>
+                  <p className={`text-[10.5px] tracking-[0.15em] uppercase font-mono mb-0.5 ${isDark ? "text-white/30" : "text-[#64748B]"}`}>
                     {h.label}
                   </p>
-                  <p className={`text-[13.5px] leading-snug ${isDark ? "text-white/60" : "text-slate-600"}`}>
+                  <p className={`text-[13.5px] leading-snug ${isDark ? "text-white/60" : "text-[#334155]"}`}>
                     {h.value}
                   </p>
                 </div>

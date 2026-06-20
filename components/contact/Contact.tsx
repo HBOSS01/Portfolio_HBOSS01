@@ -271,10 +271,11 @@ function SocialCard({ link }: { link: SocialLink }) {
       transition={{ duration: 0.2, ease: "easeOut" }}
       className="flex items-center gap-3 p-3.5 rounded-xl border"
       style={{
-        backgroundColor:      isDark ? "rgba(255,255,255,0.02)" : "rgba(255,255,255,0.7)",
-        borderColor:           accent(0.16),
+        backgroundColor:      isDark ? "rgba(255,255,255,0.02)" : "rgba(255,255,255,0.85)",
+        borderColor:           accent(isDark ? 0.16 : 0.18),
         backdropFilter:       "blur(12px)",
         WebkitBackdropFilter: "blur(12px)",
+        boxShadow:            isDark ? "none" : "0 8px 28px rgba(15,23,42,0.07)",
       }}
     >
       <div
@@ -338,10 +339,11 @@ function ContactForm() {
     <div
       className="relative p-7 sm:p-8 rounded-3xl border overflow-hidden"
       style={{
-        backgroundColor:      isDark ? "rgba(255,255,255,0.02)" : "rgba(255,255,255,0.8)",
-        borderColor:           "rgba(6,182,212,0.15)",
+        backgroundColor:      isDark ? "rgba(255,255,255,0.02)" : "rgba(255,255,255,0.90)",
+        borderColor:           "rgba(6,182,212,0.18)",
         backdropFilter:       "blur(20px)",
         WebkitBackdropFilter: "blur(20px)",
+        boxShadow:            isDark ? "none" : "0 10px 35px rgba(15,23,42,0.07)",
       }}
     >
       {/* Corner glows */}
@@ -475,8 +477,8 @@ function ContactForm() {
                 required
                 className={`w-full resize-none rounded-xl px-4 py-3 text-[13px] ${isDark ? "placeholder:text-white/18" : "placeholder:text-slate-400"} outline-none transition-all duration-200 focus:border-cyan-400/40 ${isDark ? "text-white/65" : "text-slate-700"}`}
                 style={{
-                  backgroundColor: isDark ? "rgba(255,255,255,0.03)" : "rgba(0,0,0,0.03)",
-                  border:          isDark ? "1px solid rgba(255,255,255,0.08)" : "1px solid rgba(0,0,0,0.08)",
+                  backgroundColor: isDark ? "rgba(255,255,255,0.03)" : "rgba(248,250,252,1)",
+                  border:          isDark ? "1px solid rgba(255,255,255,0.08)" : "1px solid rgba(100,116,139,0.28)",
                 }}
               />
             </div>
@@ -569,8 +571,8 @@ function Field({
           required={required}
           className={`w-full rounded-xl pl-9 pr-4 py-3 text-[13px] ${isDark ? "placeholder:text-white/18" : "placeholder:text-slate-400"} outline-none transition-all duration-200 focus:border-cyan-400/40 ${isDark ? "text-white/65" : "text-slate-700"}`}
           style={{
-            backgroundColor: isDark ? "rgba(255,255,255,0.03)" : "rgba(0,0,0,0.03)",
-            border:          isDark ? "1px solid rgba(255,255,255,0.08)" : "1px solid rgba(0,0,0,0.08)",
+            backgroundColor: isDark ? "rgba(255,255,255,0.03)" : "rgba(248,250,252,1)",
+            border:          isDark ? "1px solid rgba(255,255,255,0.08)" : "1px solid rgba(100,116,139,0.28)",
           }}
         />
       </div>

@@ -202,7 +202,7 @@ export default function GlobalBackground() {
       className="fixed inset-0 pointer-events-none transition-colors duration-500"
       style={{
         zIndex: -1,
-        backgroundColor: isDark ? "#020c18" : "#f0f4f8",
+        backgroundColor: isDark ? "#020c18" : "#F5F7FB",
       }}
       aria-hidden="true"
     >

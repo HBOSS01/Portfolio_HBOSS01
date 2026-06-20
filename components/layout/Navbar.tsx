@@ -103,12 +103,14 @@ export default function Navbar() {
           backgroundColor: scrolled
             ? isDark
               ? "rgba(2,12,24,0.82)"
-              : "rgba(240,244,248,0.88)"
+              : "rgba(245,247,251,0.94)"
             : "transparent",
-          backdropFilter: scrolled ? "blur(24px)" : "blur(4px)",
+          backdropFilter: scrolled ? "blur(28px) saturate(180%)" : "blur(4px)",
           WebkitBackdropFilter: scrolled
-            ? "blur(24px)"
+            ? "blur(28px) saturate(180%)"
             : "blur(4px)",
+          borderBottom: scrolled ? (isDark ? "1px solid rgba(6,182,212,0.12)" : "1px solid rgba(15,23,42,0.08)") : "none",
+          boxShadow: scrolled && !isDark ? "0 4px 24px rgba(15,23,42,0.06)" : undefined,
         }}
       >
         <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
@@ -195,7 +197,7 @@ export default function Navbar() {
                 whileTap={{ scale: 0.9 }}
                 className={cn(
                   "md:hidden w-10 h-10 flex items-center justify-center rounded-lg border",
-                  isDark ? "text-white/60" : "text-slate-500"
+                  isDark ? "text-white/60" : "text-slate-600"
                 )}
                 style={{
                   borderColor: isDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)",
@@ -220,7 +222,7 @@ export default function Navbar() {
                     className={
                       menuOpen
                         ? "text-cyan-400"
-                        : "text-white/60"
+                        : isDark ? "text-white/60" : "text-slate-600"
                     }
                   >
                     {menuOpen ? (
@@ -288,7 +290,7 @@ export default function Navbar() {
             }}
             className="fixed inset-0 z-40 md:hidden flex flex-col overflow-hidden"
             style={{
-              backgroundColor: isDark ? "#020c18" : "#f0f4f8",
+              backgroundColor: isDark ? "#020c18" : "#F5F7FB",
             }}
           >
             <div className="relative flex flex-col items-center justify-center flex-1 gap-2 px-8">
@@ -344,12 +346,12 @@ function NavLink({
     <button
       onClick={onClick}
       className={cn(
-        "relative px-3.5 py-2 text-[13.5px] tracking-wide rounded-lg group transition-colors duration-300",
+        "relative px-3.5 py-2 text-[13.5px] tracking-wide rounded-lg group transition-colors duration-300 font-medium",
         isActive
-          ? "text-cyan-400"
+          ? "text-cyan-500"
           : isDark
             ? "text-white/45 hover:text-white/85"
-            : "text-slate-500 hover:text-slate-800"
+            : "text-slate-500 hover:text-slate-900"
       )}
     >
       <span className="relative z-10">
@@ -361,7 +363,7 @@ function NavLink({
           layoutId="desktop-active-bg"
           className="absolute inset-0 rounded-lg"
           style={{
-            backgroundColor: "rgba(6,182,212,0.09)",
+            background: "rgba(6,182,212,0.12)",
           }}
           transition={{
             type: "spring",

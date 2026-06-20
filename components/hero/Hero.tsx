@@ -103,7 +103,7 @@ export default function Hero() {
               {...fadeUp(0.18)}
               className="text-5xl sm:text-6xl lg:text-[72px] font-bold leading-[0.98] tracking-tight"
             >
-              <span className={isDark ? "text-white block" : "text-slate-900 block"}>
+              <span className={isDark ? "text-white block" : "text-[#0F172A] block font-extrabold"}>
                 Md Fatin Hasnat
               </span>
 
@@ -121,7 +121,7 @@ export default function Hero() {
             {/* Subtitle */}
             <motion.p
               {...fadeUp(0.28)}
-              className={`text-lg sm:text-xl font-light tracking-[0.04em] ${isDark ? "text-white/60" : "text-slate-500"}`}
+              className={`text-lg sm:text-xl font-light tracking-[0.04em] ${isDark ? "text-white/60" : "text-[#475569]"}`}
             >
               AI Engineer
 
@@ -138,15 +138,15 @@ export default function Hero() {
             {/* Description */}
             <motion.p
               {...fadeUp(0.37)}
-              className={`text-[15px] leading-[1.95] max-w-[560px] mx-auto lg:mx-0 ${isDark ? "text-white/45" : "text-slate-400"}`}
+              className={`text-[15px] leading-[1.95] max-w-[560px] mx-auto lg:mx-0 ${isDark ? "text-white/45" : "text-[#64748B]"}`}
             >
               Building intelligent systems at the
               intersection of{" "}
-              <span className={isDark ? "text-white/75" : "text-slate-600"}>
+              <span className={isDark ? "text-white/75" : "text-[#334155]"}>
                 machine learning
               </span>
               ,{" "}
-              <span className={isDark ? "text-white/75" : "text-slate-600"}>
+              <span className={isDark ? "text-white/75" : "text-[#334155]"}>
                 NLP
               </span>
               , and impactful innovation.
@@ -167,14 +167,14 @@ export default function Hero() {
               {TECH_TAGS.map((tag) => (
                 <span
                   key={tag}
-                  className={`px-3 py-1.5 text-[10px] font-mono tracking-[0.16em] rounded-lg border backdrop-blur-xl ${isDark ? "text-white/35" : "text-slate-400"}`}
+                  className={`px-3 py-1.5 text-[10px] font-mono tracking-[0.16em] rounded-lg border backdrop-blur-xl ${isDark ? "text-white/35" : "text-slate-500"}`}
                   style={{
                     backgroundColor: isDark
                       ? "rgba(255,255,255,0.03)"
-                      : "rgba(0,0,0,0.04)",
+                      : "rgba(255,255,255,0.75)",
                     borderColor: isDark
                       ? "rgba(255,255,255,0.06)"
-                      : "rgba(0,0,0,0.08)",
+                      : "rgba(100,116,139,0.22)",
                   }}
                 >
                   {tag}
@@ -240,7 +240,7 @@ export default function Hero() {
         }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5"
       >
-        <span className={`text-[9px] font-mono tracking-[0.25em] uppercase ${isDark ? "text-white/20" : "text-slate-300"}`}>
+        <span className={`text-[9px] font-mono tracking-[0.25em] uppercase ${isDark ? "text-white/20" : "text-slate-400"}`}>
           Scroll
         </span>
 
@@ -253,7 +253,7 @@ export default function Hero() {
             ease: "easeInOut",
           }}
         >
-          <ChevronDown className={`w-4 h-4 ${isDark ? "text-white/20" : "text-slate-300"}`} />
+          <ChevronDown className={`w-4 h-4 ${isDark ? "text-white/20" : "text-slate-400"}`} />
         </motion.div>
       </motion.div>
     </section>
@@ -426,14 +426,15 @@ function SecondaryButton({
       onClick={onClick}
       whileHover={{ scale: 1.03 }}
       whileTap={{ scale: 0.97 }}
-      className={`flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl text-[13.5px] font-medium tracking-wide border backdrop-blur-xl ${isDark ? "text-white/65" : "text-slate-600"}`}
+      className={`flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl text-[13.5px] font-medium tracking-wide border backdrop-blur-xl ${isDark ? "text-white/65" : "text-slate-700"}`}
       style={{
         backgroundColor: isDark
           ? "rgba(255,255,255,0.04)"
-          : "rgba(0,0,0,0.04)",
+          : "rgba(255,255,255,0.85)",
         borderColor: isDark
           ? "rgba(255,255,255,0.08)"
-          : "rgba(0,0,0,0.10)",
+          : "rgba(100,116,139,0.35)",
+        boxShadow: isDark ? "none" : "0 2px 12px rgba(15,23,42,0.06)",
       }}
     >
       {children}
