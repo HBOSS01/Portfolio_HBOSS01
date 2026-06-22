@@ -1,13 +1,19 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 
 export default function Cursor() {
   const bigCircleRef = useRef(null);
   const smallCircleRef = useRef(null);
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
 
   useEffect(() => {
+    if (window.matchMedia("(pointer: coarse)").matches || window.innerWidth < 768) {
+      setIsTouchDevice(true);
+      return;
+    }
+
     const bigCircle   = bigCircleRef.current;
     const smallCircle = smallCircleRef.current;
 
@@ -85,10 +91,13 @@ export default function Cursor() {
     };
   }, []);
 
+  if (isTouchDevice) return null;
+
   return (
     <>
       {/* Big lagging circle */}
       <div
+        className="hidden md:block"
         ref={bigCircleRef}
         style={{
           position:        "fixed",
@@ -108,6 +117,7 @@ export default function Cursor() {
 
       {/* Small snappy dot */}
       <div
+        className="hidden md:block"
         ref={smallCircleRef}
         style={{
           position:        "fixed",
