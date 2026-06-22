@@ -68,7 +68,7 @@ export default function Hero() {
       <HeroBackground />
 
       {/* Main Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 w-full py-32 md:py-36">
+      <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 w-full pt-20 pb-16 md:py-36">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
 
           {/* LEFT CONTENT */}
